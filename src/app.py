@@ -179,3 +179,5 @@ Please enter the updated product name.
 
     else:
         print('Please select a valid option.')
+
+print ('End of application.')
