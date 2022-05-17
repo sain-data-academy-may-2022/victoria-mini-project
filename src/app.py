@@ -1,6 +1,7 @@
 # imports
 
-import os
+from modules.prod_mgmt import product_menu
+from modules.clear import clear
 
 
 # products
@@ -18,10 +19,6 @@ products = [
 orders = []
 
 
-# functions
-
-
-
 # main program
 # maintain main program loop
 while True:
@@ -33,54 +30,13 @@ while True:
 
     if user_input == '0':
         # if option 0, exit program
+        clear()
         print('\nClosing program, goodbye!')
         break
 
     elif user_input == '1':
-        # if option 1, enter product management menu
-        print('product management')
-
-        # maintain product management menu
-        while True:
-            ### print product management menu
-            print('product management menu')
-
-            # ask for user input first, then check against menu options
-            user_input = input('> ')
-
-            if user_input == '0':
-                # RETURN to main menu
-                break
-
-            elif user_input == '1':
-                # PRINT products list
-                print('print products list')
-
-            elif user_input == '2':
-                # CREATE new product
-                # GET user input for product name
-                # APPEND product name to products list
-                print('create new product')
-
-            elif user_input == '3':
-                # UPDATE existing product
-                # PRINT products name with its index value
-                # GET user input for product index value
-                # GET user input for new product name
-                # UPDATE product name at index in products list
-                print('update existing product')
-
-            elif user_input == '4':
-                # DELETE product
-                # PRINT products list
-                # GET user input for product index value
-                # DELETE product at index in products list
-                print('delete product')
-
-            else:
-                # handle invalid input
-                print('Please select a valid option.')
-
+        # call product management function
+        product_menu()
 
     elif user_input == '2':
         # if option 2, enter order management menu
@@ -143,7 +99,7 @@ while True:
                 print('delete order')
 
             else:
-                print('Please select a valid option.')
+                print('Please enter a valid option.')
 
     else:
-        print('Please select a valid option.')
+        print('Please enter a valid option.')
