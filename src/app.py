@@ -23,6 +23,7 @@ orders = []
 # maintain main program loop
 while True:
     ### print main menu here
+    clear()
     print('main menu:')
 
     # ask for user input first, then check against menu options
@@ -31,7 +32,7 @@ while True:
     if user_input == '0':
         # if option 0, exit program
         clear()
-        print('\nClosing program, goodbye!')
+        print('Closing program, goodbye!\n\n\n')
         break
 
     elif user_input == '1':
