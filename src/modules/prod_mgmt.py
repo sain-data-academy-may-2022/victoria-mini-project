@@ -45,7 +45,7 @@ def print_product_list_with_index(list):
         for each in list:
             print(f'{products.index(each)+1}\t{each}')     # index starts with 1
 
-def remove_item(index):
+def remove_item(index):         ### FINISH AND USE WITHIN OPTION 4
     index = index-1
     print(index)
 
@@ -95,13 +95,42 @@ def product_menu():
                     products.append(new_product)
                     print(f'\n{new_product} was added to the product list.\n')
 
-        elif user_input == '3': ### TO DO
+        elif user_input == '3': ### DONE - refactor
             # UPDATE existing product
             # PRINT products name with its index value
             # GET user input for product index value
             # GET user input for new product name
             # UPDATE product name at index in products list
-            print('update existing product')
+            clear()
+            print_product_options()
+            print('\n[3] - Update Existing Product\n')
+            print_product_list_with_index(products)
+            print('\nEnter the ID of the item to be updated, or enter 0 to cancel:')
+
+            prod_index = input('> ')
+
+            if prod_index == '0':
+                clear()
+                print_product_options()
+                print('\nSelect an option:')
+            else:
+                try:
+                    prod_index = int(prod_index)
+                except:
+                    print('\nPlease enter the ID of the item to be updated.\n')
+
+                if type(prod_index) is int:
+                    if prod_index > 0 and prod_index <= len(products):
+                        products[prod_index - 1] = input('\nPlease enter the updated product name.\n> ')
+
+                        clear()
+                        print_product_options()
+                        print(f'\nID {prod_index} is now {products[prod_index - 1]}')
+                        print('\nSelect another option:')
+                    else:
+                        print('\nID does not exist in product list.\n')
+                else:
+                    continue  
 
         elif user_input == '4': ### DONE - refactor
             # DELETE product
