@@ -63,7 +63,7 @@ def order_menu():                   # print order management menu options
     
     [1] - Display Order List
     [2] - Add a New Order
-    [3] - Update Existing Order Status
+    [3] - Advance Order Status
     [4] - Update Existing Order Details
     [5] - Delete an Order
     
@@ -107,13 +107,13 @@ def delete_item(list):              #
     list.pop(id - 1)
 
 # order management
-def print_order_list(orders, s_list):      # print a given dict of dictionaries
+def print_order_list(orders, s_list):         # print a given dict of dictionaries
     print('------')
     for index in orders:
         print_order(index, orders[index], s_list)
         print('------')
 
-def print_order(idx, ord, ord_status):     # prints a given dictionary in a specified format
+def print_order(idx, ord, ord_status):        # prints a given dictionary in a specified format
     print(f'''Order Number: {idx}
 
    Name:  {ord['customer_name']}
@@ -122,11 +122,16 @@ Address:  {ord['customer_address']}
 
 Order Status: {ord_status[ord['status']]}''')
 
-def print_order_and_name(dict):            # prints just the name and order number of a given dict
+def print_num_name(dict):                     # prints just the name and order number of a given dict
     for index in dict:
         print(f'Order: {index}, Name: {dict[index]["customer_name"]}')
 
-def add_order(count, dict):                # takes a list of dicts and an order count, returns new order count
+def print_num_name_status_changeable(dict, ord_status):  # prints the name, status, and order number of a given dict
+    for index in dict:
+        # if dict[index]['status'] < max(ord_status) :
+        print(f'Order: {index}, {dict[index]["customer_name"]}, {ord_status[dict[index]["status"]]}')
+
+def add_order(count, dict):                   # takes a list of dicts and an order count, returns new order count
     new_order = {}
     new_order['customer_name'] = input('\nPlease enter the customer\'s name:\n> ').strip()
     new_order['customer_address'] = input('\nPlease enter the customer\'s address:\n> ').strip()
@@ -139,10 +144,9 @@ def add_order(count, dict):                # takes a list of dicts and an order 
     return count
 
 def get_order_num(dict):
-    print_order_and_name(dict)
     while True:
         try:
-            index = int(input('\nEnter the order number:\n> '))
+            index = input('\nEnter the order number:\n> ')
             if index in dict:
                 return index
             else:
@@ -150,11 +154,23 @@ def get_order_num(dict):
         except ValueError:
             print('\nNot a valid order number.')
 
-def delete_order(dict):                    # deletes a dict at index from given dict
+def delete_order(dict):                       # deletes a dict at index from given dict
+    print_num_name(dict)
     idx = get_order_num(dict)
     del dict[idx]
 
+def advance_status(idx, dict, s_list):        # 
+    if dict[idx]['status'] < max(s_list):
+        dict[idx]['status'] += 1
+        return dict
+    else:
+        print('This order has already been delivered.')
 
+def change_order_status(dict, s_list):        # 
+    print_num_name_status_changeable(dict, s_list)
+    idx = get_order_num(dict)
+    dict = advance_status(idx, dict, s_list)
+    return dict
 
 # utilities
 def clear():                        # clear terminal screen
@@ -181,8 +197,8 @@ def write_products(list):           # takes list and writes out products.csv fil
     
 def load_orders():                  # load orders.json and return it as a dict
     with open('data/orders.json', 'r') as file:
-        json_reader = json.load(file)
-        return json_reader
+        json_order = json.load(file)
+        return json_order
 
 def write_orders(dict):             # takes dict and writes out orders.json file
     with open('data/orders.json', 'w') as file:
@@ -194,15 +210,12 @@ def write_orders(dict):             # takes dict and writes out orders.json file
 # loads product, orders 
 products = load_products()
 orders = load_orders()
-order_count = int(max(orders)) + 1
+order_count = int(max(orders.keys())) + 1
 
 while True:             # main program loop
-
     user_input = main_menu()
 
-    
-
-    if user_input == '0':   # exit program
+    if user_input == '0':   # export products and orders, exit program
         write_products(products)
         write_orders(orders)
         print('\nClosing program, goodbye!\n')
@@ -255,8 +268,8 @@ while True:             # main program loop
             elif user_input == '2': # create new order          ### DONE
                 order_count = add_order(order_count, orders)
 
-            elif user_input == '3': # update order status       ### CURRENT
-                continue
+            elif user_input == '3': # advance order status      ### DONE
+                change_order_status(orders, order_status)
 
             elif user_input == '4': # update order details      ### TO DO
                 continue
@@ -269,3 +282,6 @@ while True:             # main program loop
 
     else:                   # handle invalid input
         print('\nPlease enter a valid option.')
+
+# end of program debug area
+
