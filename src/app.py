@@ -3,7 +3,7 @@ import os
 import csv
 import json
 
-### data            # split out to seperate files
+### data            # split out to seperate files - DONE but keeping for testing
 # product list
 products = [
     'Waffles',
@@ -13,22 +13,7 @@ products = [
     'Toast'
 ]
 
-# order list
-order_count = 1
-
 orders = {
-123: {
-    'customer_name': 'Sherlock Holmes',
-    'customer_address': '221b Baker Street',
-    'customer_phone': '07700 123 456',
-    'status': 5
-    },
-258: {
-    'customer_name': 'Phileas Fogg',
-    'customer_address': '7 Savile Row',
-    'customer_phone': '07700 987 321',
-    'status': 2
-    },
 347: {
     'customer_name': 'Wallace and Gromit',
     'customer_address': '62 West Wallaby Street',
@@ -36,6 +21,8 @@ orders = {
     'status': 1
     }
 }
+
+order_count = 1
 
 order_status = {
     1: 'order placed',
@@ -163,7 +150,7 @@ def get_order_num(dict):
         except ValueError:
             print('\nNot a valid order number.')
 
-def delete_order(dict):               # deletes a dict at index from given dict
+def delete_order(dict):                    # deletes a dict at index from given dict
     idx = get_order_num(dict)
     del dict[idx]
 
@@ -180,27 +167,44 @@ def check_if_empty(list):           # check if a given list is empty
     else:
         return False
 
+# file management
+
 def load_products():                # load products.csv file and return it as a list
-    with open("data/products.csv", 'r') as file:
+    with open('data/products.csv', 'r') as file:
         csv_file = list(csv.reader(file, delimiter=','))
         return csv_file[0]
 
 def write_products(list):           # takes list and writes out products.csv file
     with open('data/products.csv', 'w') as file:
-        print(list)
         write = csv.writer(file)
         write.writerow(list)
     
+def load_orders():                  # load orders.json and return it as a dict
+    with open('data/orders.json', 'r') as file:
+        json_reader = json.load(file)
+        return json_reader
+
+def write_orders(dict):             # takes dict and writes out orders.json file
+    with open('data/orders.json', 'w') as file:
+        json.dump(dict, file, indent=4)
+
 
 ### program
+
+# loads product, orders 
 products = load_products()
+orders = load_orders()
+order_count = int(max(orders)) + 1
 
 while True:             # main program loop
 
     user_input = main_menu()
 
+    
+
     if user_input == '0':   # exit program
         write_products(products)
+        write_orders(orders)
         print('\nClosing program, goodbye!\n')
         break
 

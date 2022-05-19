@@ -1,0 +1,26 @@
+{
+    "1": {
+        "customer_name": "Sherlock Holmes",
+        "customer_address": "221b Baker Street",
+        "customer_phone": "07700 123 456",
+        "status": 5
+    },
+    "2": {
+        "customer_name": "Phileas Fogg",
+        "customer_address": "7 Savile Row",
+        "customer_phone": "07700 987 321",
+        "status": 2
+    },
+    "3": {
+        "customer_name": "Wallace and Gromit",
+        "customer_address": "62 West Wallaby Street",
+        "customer_phone": "07700 232 787",
+        "status": 1
+    },
+    "4": {
+        "customer_name": "Santa Klaus",
+        "customer_address": "The North Pole",
+        "customer_phone": "07700 123 789",
+        "status": 1
+    }
+}
