@@ -4,7 +4,6 @@ import csv
 import json
 
 ### data            # split out to seperate files - DONE but keeping for testing
-# product list
 products = [
     'Waffles',
     'Pancakes',
@@ -35,7 +34,8 @@ order_status = {
 ### functions
 # menu management
 def main_menu():                    # print main menu options
-    print('''\nWelcome to 
+    clear()
+    print('''\nWelcome to Bready or Not Breakfast Bar
 
     [1] - Product Management
     [2] - Order Management
@@ -138,13 +138,14 @@ def add_order(count, dict):                   # takes a list of dicts and an ord
     new_order['customer_phone'] = input('\nPlease enter the customer\'s phone number:\n> ').strip()
     new_order['status'] = 1
 
-    dict[count] = new_order
+    dict[str(count)] = new_order
     count += 1
 
     return count
 
 def get_order_num(dict):
     while True:
+        print(dict)
         try:
             index = input('\nEnter the order number:\n> ')
             if index in dict:
@@ -172,6 +173,27 @@ def change_order_status(dict, s_list):        #
     dict = advance_status(idx, dict, s_list)
     return dict
 
+def change_order_details(dict, s_list):
+    print_order_list(dict, s_list)
+    idx = get_order_num(dict)
+    print('\nYou are changing:\n')
+    print_order(idx, dict[idx], s_list)
+    
+    text = input('\nEnter the updated customer name or enter 0 to skip:\n> ').strip()
+    if text != '0':
+        dict[idx]['customer_name'] = text
+    text = input('\nEnter the updated customer address or enter 0 to skip:\n> ').strip()
+    if text != '0':
+        dict[idx]['customer_address'] = text
+    text = input('\nEnter the updated customer phone number or enter 0 to skip:\n> ').strip()
+    if text != '0':
+        dict[idx]['customer_phone'] = text
+    text = int(input('\nEnter the updated order status or enter 0 to skip:\n> ').strip())
+    if text != 0:
+        dict[idx]['status'] = text
+    print_order(idx, dict[idx], s_list)
+    
+
 # utilities
 def clear():                        # clear terminal screen
     os.system('clear')
@@ -184,7 +206,6 @@ def check_if_empty(list):           # check if a given list is empty
         return False
 
 # file management
-
 def load_products():                # load products.csv file and return it as a list
     with open('data/products.csv', 'r') as file:
         csv_file = list(csv.reader(file, delimiter=','))
@@ -271,8 +292,8 @@ while True:             # main program loop
             elif user_input == '3': # advance order status      ### DONE
                 change_order_status(orders, order_status)
 
-            elif user_input == '4': # update order details      ### TO DO
-                continue
+            elif user_input == '4': # update order details      ### DONE
+                change_order_details(orders, order_status)
 
             elif user_input == '5': # delete existing order     ### DONE
                 delete_order(orders)

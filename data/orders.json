@@ -9,18 +9,18 @@
         "customer_name": "Phileas Fogg",
         "customer_address": "7 Savile Row",
         "customer_phone": "07700 987 321",
-        "status": 3
+        "status": 2
     },
     "3": {
         "customer_name": "Wallace and Gromit",
         "customer_address": "62 West Wallaby Street",
         "customer_phone": "07700 232 787",
-        "status": 2
+        "status": 1
     },
     "4": {
-        "customer_name": "Santa Klaus",
-        "customer_address": "The North Pole",
-        "customer_phone": "07700 010 101",
-        "status": 1
+        "customer_name": "Keith and Jim",
+        "customer_address": "The Moon",
+        "customer_phone": "0800 00 1066",
+        "status": 2
     }
 }
