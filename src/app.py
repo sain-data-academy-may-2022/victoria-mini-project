@@ -4,6 +4,7 @@ import json
 from modules.clear_screen import clear_screen
 from file_handlers.csv import load_products, write_products
 from file_handlers.json import load_orders, write_orders
+import modules.product_management as pm
 
 order_status = {
     1: 'order placed',
