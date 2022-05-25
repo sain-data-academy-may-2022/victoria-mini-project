@@ -1,9 +1,8 @@
 ### imports
-import csv
-import json
 from modules.clear_screen import clear_screen
-from file_handlers.csv import load_products, write_products
-from file_handlers.json import load_orders, write_orders
+from file_handlers.csv_handler import load_products, write_products, \
+                                    load_couriers, write_couriers
+from file_handlers.json_handler import load_orders, write_orders
 import modules.product_management as pm
 
 order_status = {
@@ -191,6 +190,7 @@ def check_if_empty(list):           # check if a given list is empty
 # loads product, orders 
 products = load_products()
 orders = load_orders()
+couriers = load_couriers()
 order_count = int(max(orders.keys())) + 1
 
 while True:             # main program loop
@@ -200,6 +200,7 @@ while True:             # main program loop
         # export products and orders, exit program
         write_products(products)
         write_orders(orders)
+        write_couriers(couriers)
         print('\nClosing program, goodbye!\n')
         break
 
@@ -211,7 +212,7 @@ while True:             # main program loop
             if user_input == '0':   # return to main menu       ### DONE
                 break
 
-            elif user_input == '1': # print product list        ### DONE
+            elif user_input == '1': # print product list        ### DONE - refactored
                 if check_if_empty(products):
                     print('\nThe current menu is:')
                     print_list(products)
@@ -272,16 +273,16 @@ while True:             # main program loop
                 break
 
             elif user_input == '1': # print courier list        ### 
-                print() 
+                pass 
 
             elif user_input == '2': # create new courier        ###
-                print()
+                pass
             
             elif user_input == '3': # update existing courier   ###
-                print()
+                pass
 
             elif user_input == '4': # delete courier            ###
-                print()
+                pass
 
 
 
