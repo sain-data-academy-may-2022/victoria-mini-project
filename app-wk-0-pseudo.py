@@ -1,27 +1,3 @@
-# imports
-
-import os
-
-
-# products
-### create an initial products list, replace later
-
-products = [
-    'salad',
-    'coffee',
-    'sandwich'
-]
-
-# orders
-### create an initial orders list (list of dicts), replace later
-
-orders = []
-
-
-# functions
-
-
-
 # main program
 # maintain main program loop
 while True:
