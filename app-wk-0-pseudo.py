@@ -81,9 +81,47 @@ while True:
                 # handle invalid input
                 print('Please select a valid option.')
 
-
     elif user_input == '2':
-        # if option 2, enter order management menu
+        # if option 2, enter courier management menu
+        print('courier management')
+
+        # maintain courier management menu
+        while True:
+            ### print courier management menu
+            print('courier management menu')
+
+            # ask for user input first, then check against menu options
+            user_input = input('> ')
+
+            if user_input == '0':
+                # RETURN to main menu
+                break
+
+            elif user_input == '1':
+                # PRINT couriers list
+
+            elif user_input == '2':
+                # CREATE new courier
+                # GET user input for courier name
+                # APPEND courier name to couriers list
+
+            elif user_input == '3':
+                # UPDATE existing courier
+
+                # PRINT courier names with its index value
+                # GET user input for courier index value
+                # GET user input for new courier name
+                # UPDATE courier name at index in couriers list
+
+            elif user_input == '4':
+                # DELETE courier
+
+                # PRINT courier list
+                # GET user input for courier index value
+                # DELETE courier at index in courier list
+
+    elif user_input == '3':
+        # if option 3, enter order management menu
         print('order management')
 
         # maintain order management menu
@@ -107,6 +145,8 @@ while True:
                 # GET user input for customer address
                 # GET user input for customer phone number
 
+                # PRINT couriers list with index value for each courier
+                # GET user input for courier index to select courier
                 # SET order status to be 'preparing'
                 # APPEND order to orders list
                 print('create order and get input')
@@ -116,6 +156,7 @@ while True:
                 
                 # PRINT orders list with its index values
                 # GET user input for order index value
+                
                 # PRINT order status list with index values
                 # GET user input for order status index value
                 # UPDATE status for order
