@@ -7,13 +7,14 @@ from modules.main_menu import main_menu
 # load files
 products = load_products()
 couriers = load_couriers()
-orders = load_orders
+orders = load_orders()
 
 # main program file
 
 products, couriers, orders = main_menu(products, couriers, orders)
 
-# save files
-# write_products()
-# write_couriers()
-# write_orders()
+# save files and exit
+# write_products(products)
+# write_couriers(couriers)
+# write_orders(orders)
+print('\nClosing program, goodbye!\n')

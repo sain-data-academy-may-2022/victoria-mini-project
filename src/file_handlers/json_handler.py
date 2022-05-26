@@ -14,3 +14,4 @@ def write_orders(a_dict):
     '''write out a dictionary in an orders.json file'''
     with open('data/orders.json', 'w', encoding='utf-8') as file:
         json.dump(a_dict, file, indent=4)
+        print('Order list saved...')

@@ -15,6 +15,7 @@ def write_products(a_list):
     with open('data/products.csv', 'w', encoding='utf-8') as file:
         write = csv.writer(file)
         write.writerow(a_list)
+        print('Products list saved...')
 
 # load couriers.csv file and return it as a list
 def load_couriers():
@@ -29,3 +30,4 @@ def write_couriers(a_list):
     with open('data/couriers.csv', 'w', encoding='utf-8') as file:
         write = csv.writer(file)
         write.writerow(a_list)
+        print('Courier list saved...')

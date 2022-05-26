@@ -1,5 +1,13 @@
 '''Module with functions to manage the orders list'''
 
+import modules.clear_screen as cs
+
+### data
+status = ['order placed',
+        'being prepared',
+        'completed, awaiting collection',
+        'in-transit',
+        'delivered']
 
 # print the order management menu options
 def print_order_options():
@@ -21,6 +29,8 @@ def order_management(order_list):
     '''Maintains the loop for the order management menu'''
 
     running = True
+
+    cs.clear_screen()
     print_order_options()
 
     while running:
@@ -47,3 +57,4 @@ def order_management(order_list):
 
         else:
             print('Invalid selection.')
+

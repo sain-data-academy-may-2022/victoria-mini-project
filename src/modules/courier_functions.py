@@ -1,5 +1,7 @@
 '''Module with functions to manage the courier list'''
 
+import modules.clear_screen as cs
+import modules.utilities as util
 
 # print the courier management menu options
 def print_courier_options():
@@ -20,6 +22,8 @@ def courier_management(courier_list):
     '''Maintains the loop for the courier management menu'''
 
     running = True
+
+    cs.clear_screen()
     print_courier_options()
 
     while running:
@@ -30,16 +34,38 @@ def courier_management(courier_list):
             return courier_list
 
         elif choice == '1':
-            print('courier list')
+            util.print_plain_list('couriers', courier_list)
 
-        elif choice == '2':
-            print('new')
+        elif choice == '2':         # DONE
+            add_couriers(courier_list)
 
         elif choice == '3':
+            update_a_courier(courier_list)
             print('update')
 
         elif choice == '4':
-            print('delete')
+            remove_couriers(courier_list)
+
+        elif choice == 'r':
+            cs.clear_screen()
+            print_courier_options()
 
         else:
             print('Invalid selection.')
+
+
+def add_couriers(courier_list):
+    '''Loop which adds a courier to a courier list'''
+
+    util.loop_add_items_to_list('courier', courier_list)
+
+
+def update_a_courier(courier_list):
+    pass
+
+
+def remove_couriers(courier_list):
+    pass
+
+
+# TESTS
