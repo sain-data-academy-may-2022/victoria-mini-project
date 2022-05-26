@@ -36,7 +36,7 @@ def courier_management(courier_list):
         elif choice == '1':
             util.print_plain_list('couriers', courier_list)
 
-        elif choice == '2':         # DONE
+        elif choice == '2':
             add_couriers(courier_list)
 
         elif choice == '3':
@@ -59,7 +59,8 @@ def add_couriers(courier_list):
     util.loop_add_items_to_list('courier', courier_list)
 
 
-def update_a_courier(courier_list):
+def update_a_courier(courier_list):         # <---- REFACTOR
+    '''generic docstring'''
     print('\n' + util.format_list_indexed(courier_list))
     index = util.get_int_input('Enter the ID of the courier to be updated:') - 1
 
@@ -74,19 +75,8 @@ def update_a_courier(courier_list):
         print('Invalid ID\n')
 
 
-
-#     print('\n' + util.format_list_indexed(courier_list))
-#     index = util.get_int_input('Enter the ID of the courier to be updated:') - 1
-
-#     if util.is_index_within_range(index, courier_list):
-#         new_courier = util.get_string_input('Enter the new name:')
-
-#         util.update_item_in_list(new_courier, index, courier_list)
-#     else:
-#         print('Invalid ID')
-
-
 def remove_couriers(courier_list):
+    '''generic docstring'''
     util.loop_remove_items_from_list('courier', courier_list)
 
 

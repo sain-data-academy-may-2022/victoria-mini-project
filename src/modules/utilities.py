@@ -1,13 +1,4 @@
 '''utility functions for handling data within the app'''
-
-
-
-
-
-
-
-
-
 #
 #
 #
@@ -15,7 +6,7 @@
 #
 ### BOOL CHECKS
 # checks if a list has items or not
-def check_list_has_items(a_list):
+def check_list_has_items(a_list: list):
     '''If a list has items, returns True. Otherwise returns False.'''
 
     if a_list:
@@ -30,27 +21,19 @@ def is_index_within_range(index: int, a_list: list):
     '''Returns True if a given integer exists as an index within a list'''
 
     return index >= 0 and index < len(a_list)
+
+
+# checks if a str is a key within a dictionary
+def is_string_a_key(text: str, a_dict: dict):
+    '''returns True is a string exists as a key in a dictionary'''
+
+    return text in a_dict
 #
 #
 #
 #
 #
 ### ORDERS
-# add an order
-def add_order(order_list, courier_list):        ### <--- TO DO - ADD COURIER CHECK
-    ''''''
-    order_count = int(max(order_list.keys())) + 1
-    new_order = {}
-    new_order['customer_name'] = format_string(input('\nPlease enter the customer\'s name:\n> '))
-    new_order['customer_address'] = format_string(input('\nPlease enter the customer\'s address:\n> ')) ## FORMAT TEXT 
-    new_order['customer_phone'] = format_string(input('\nPlease enter the customer\'s phone number:\n> ')) ## FORMAT TEXT
-    new_order['courier'] = input('\nPlease enter the courier\'s ID:\n> ')
-    new_order['status'] = 0
-
-    order_list[str(order_count)] = new_order
-    
-    return order_list
-
 #
 #
 #
@@ -114,8 +97,9 @@ def loop_remove_items_from_list(type_of_item: str, a_list: list):
     while a_list:
         print_indexed_list(type_of_item, a_list)
 
-        index = get_int_input(f'Enter the ID of the {type_of_item} to be removed, or 0 to cancel:') - 1
-        
+        index = \
+            get_int_input(f'Enter the ID of the {type_of_item} to be removed, or 0 to cancel:') - 1
+
         if index == -1:
             break
 
@@ -125,7 +109,7 @@ def loop_remove_items_from_list(type_of_item: str, a_list: list):
 
     else:
         print(format_list(a_list))
-    
+
     return a_list
 #
 #
@@ -133,6 +117,16 @@ def loop_remove_items_from_list(type_of_item: str, a_list: list):
 #
 #
 ### FORMATTING AND PRINTING
+# prints a shortened form of an order dictionary
+def print_short_order_list(order_list: dict,
+                            status: list):
+    '''prints a formatted list of orders in a shortened form'''
+
+    print('')
+    for order in order_list:
+        print(f'Order {order}: {status[order_list[order]["status"]]} {order_list[order]["customer_name"]}')
+
+
 # prints a given order in a specified format
 def print_an_order(order_id: str,
                 order: dict,
@@ -147,13 +141,13 @@ def print_an_order(order_id: str,
     try:
         print(f'Courier:  {courier_list[order["courier"]]}')
     except IndexError:
-        print(f'Courier:  Unknown')
-    
+        print('Courier:  Unknown')
+
     print(f'\nOrder Status: {status[order["status"]]}')
 
 
 # print a formatted order dictionary
-def print_order_list(order_list: dict, 
+def print_order_list(order_list: dict,
                     courier_list: list,
                     status: list):
     '''prints a formatted list of everything in orders'''
@@ -161,6 +155,12 @@ def print_order_list(order_list: dict,
     for order in order_list:
         print_an_order(order, order_list[order], courier_list, status)
         print('------')
+
+
+# prints a list with indexes starting at 0
+def print_list_test(a_list):    # <--- TO DO - rename
+    for index, name in enumerate(a_list):
+        print(f'{index} - {name}')
 
 
 # print a list without indexes
@@ -219,20 +219,52 @@ def format_string(text: str):
 # takes a question to ask and returns an integer response
 def get_int_input(question: str):
     '''Gets an input question and returns an integer is the input can be converted'''
+
     while True:
         number = input(f'{question}\n> ')
         if number.isdigit():
             return int(number)
+
         else:
-            print('Please enter a valid number.\n')
+            print('Please enter a valid number.')
+
+
+# takes a question and gets an integer but only returns it 
+# if the integer exists within a list
+def get_int_within_list(question: str, a_list:list):
+    '''Gets an input question and returns an integer if it is an index within a list'''
+    
+    index = get_int_input(question) - 1
+
+    if is_index_within_range(index, a_list):
+        return 0 if (index == 0) else index
+
+    else:
+        get_int_within_list(question, a_list)
+
 
 
 # takes a question to ask and returns a string response
 def get_string_input(question: str):
     '''Gets an input question and returns a non-empty string'''
+
     while True:
         answer = input(f'{question}\n> ')
         if len(answer) > 0:
             return answer
+
         else:
             print('Invalid input.\n')
+        get_int_within_list(question, a_list)
+
+
+# takes a question and returns a string if it is a key within a dictionary
+def get_dictionary_key(question: str, a_dict: dict):
+    '''Gets an input question and dict and returns a string if it is a key within that dictionary'''
+    
+    key = get_string_input(question)
+
+    if is_string_a_key(key, a_dict):
+        return key
+    else:
+        get_dictionary_key(question, a_dict)

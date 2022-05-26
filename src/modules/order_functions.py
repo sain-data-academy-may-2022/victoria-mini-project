@@ -4,13 +4,12 @@ import modules.clear_screen as cs
 import modules.utilities as util
 
 ### data
-status = ['order placed',
-        'being prepared',
-        'completed, awaiting collection',
-        'in-transit',
-        'delivered']
+status = ['order placed       ',
+          'being prepared     ',
+          'awaiting collection',
+          'in-transit         ',
+          'delivered          ']
 
-order_count = 0
 
 ### main functions
 # print the order management menu options
@@ -49,16 +48,17 @@ def order_management(product_list, courier_list, order_list):
             util.print_order_list(order_list, courier_list, status)
 
         elif choice == '2':
-            print('new')
+            add_order(order_list, courier_list)
 
         elif choice == '3':
-            print('advance status')
+            update_order_status(order_list, status)
 
         elif choice == '4':
-            print('update')
+            update_order_details(order_list, courier_list, status)
+            # print('Hi, this currently does nothing :)')
 
         elif choice == '5':
-            print('delete')
+            print('Hi, this currently does nothing :)')
 
         elif choice == 'r':
             cs.clear_screen()
@@ -67,4 +67,60 @@ def order_management(product_list, courier_list, order_list):
 
         else:
             print('Invalid selection.')
+
+
+def add_order(order_list: dict, courier_list: list):
+    '''generic docstring'''
+    order_count = 0
+    order_count = int(max(order_list.keys())) + 1
+    new_order = {}
+    
+    new_order['customer_name'] = \
+        util.format_string(input('\nPlease enter the customer\'s name:\n> '))
+
+    new_order['customer_address'] = \
+        util.format_string(input('\nPlease enter the customer\'s address:\n> '))
+
+    new_order['customer_phone'] = \
+        util.format_string(input('\nPlease enter the customer\'s phone number:\n> '))
+
+    util.print_indexed_list('courier', courier_list)
+
+    new_order['courier'] = \
+        util.get_int_within_list('Please enter the courier\'s ID:', courier_list)
+
+    new_order['status'] = 0
+
+    order_list[str(order_count)] = new_order
+
+    return order_list
+
+
+def update_order_status(order_list, status_list):
+    util.print_short_order_list(order_list, status_list)
+    updated_order = \
+        util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
+    
+    util.print_list_test(status)
+    
+    updated_status = \
+        util.get_int_within_list('\nEnter the status code for this order:', status) + 1
+    
+    order_list[updated_order]['status'] = updated_status
+
+
+def update_order_details(order_list, courier_list, status):
+    util.print_order_list(order_list, courier_list, status)
+    updated_order = \
+        util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
+
+    
+
+    # for key, value in order_list[updated_order].items():
+    #     print(key, value)
+
+
+def delete_an_order(order_list):
+    pass
+
 

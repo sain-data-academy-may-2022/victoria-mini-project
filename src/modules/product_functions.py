@@ -36,7 +36,7 @@ def product_management(product_list):
         elif choice == '1':
             util.print_plain_list('products', product_list)
 
-        elif choice == '2':         # DONE
+        elif choice == '2':
             add_products(product_list)
 
         elif choice == '3':
@@ -59,7 +59,8 @@ def add_products(product_list):
     util.loop_add_items_to_list('product', product_list)
 
 
-def update_a_product(product_list):
+def update_a_product(product_list):         # <---- REFACTOR
+    '''generic docstring'''
     print('\n' + util.format_list_indexed(product_list))
     index = util.get_int_input('Enter the ID of the product to be updated:') - 1
 
@@ -75,6 +76,7 @@ def update_a_product(product_list):
 
 
 def remove_products(product_list):
+    '''generic docstring'''
     util.loop_remove_items_from_list('product', product_list)
 
 

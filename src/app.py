@@ -20,19 +20,3 @@ print('\nClosing program, goodbye!\n')
 
 
 ## DEV AREA
-
-
-
-
-
-def add_order(order_list, courier_list):
-    order_count = int(max(order_list.keys())) + 1
-    new_order = {}
-    new_order['customer_name'] = input('fds') ## FORMAT TEXT 
-    new_order['customer_address'] = input('\nPlease enter the customer\'s address:\n> ') ## FORMAT TEXT 
-    new_order['customer_phone'] = input('\nPlease enter the customer\'s phone number:\n> ') ## FORMAT TEXT
-    new_order['courier'] = input('enter courier id:')
-    new_order['status'] = 0
-
-    order_list[str(order_count)] = new_order
-
