@@ -14,7 +14,7 @@ def print_courier_options():
     [3] - Update Existing Courier
     [4] - Delete a Courier
     
-    [0] - Back to Main Menu''')
+    [0] - Back to Main Menu\n''')
 
 
 # courier option management function
@@ -27,7 +27,7 @@ def courier_management(courier_list):
     print_courier_options()
 
     while running:
-        choice = input('\nPlease select an option:\n> ')
+        choice = input('Please select an option:\n> ')
 
         if choice == '0':
             running = False
@@ -41,7 +41,6 @@ def courier_management(courier_list):
 
         elif choice == '3':
             update_a_courier(courier_list)
-            print('update')
 
         elif choice == '4':
             remove_couriers(courier_list)
@@ -61,11 +60,34 @@ def add_couriers(courier_list):
 
 
 def update_a_courier(courier_list):
-    pass
+    print('\n' + util.format_list_indexed(courier_list))
+    index = util.get_int_input('Enter the ID of the courier to be updated:') - 1
+
+    if util.is_index_within_range(index, courier_list):
+        new_courier = util.format_string(util.get_string_input('\nEnter the new name:'))
+
+        print(f'{courier_list[index]} is now {new_courier}.\n')
+
+        util.update_item_in_list(new_courier, index, courier_list)
+
+    else:
+        print('Invalid ID\n')
+
+
+
+#     print('\n' + util.format_list_indexed(courier_list))
+#     index = util.get_int_input('Enter the ID of the courier to be updated:') - 1
+
+#     if util.is_index_within_range(index, courier_list):
+#         new_courier = util.get_string_input('Enter the new name:')
+
+#         util.update_item_in_list(new_courier, index, courier_list)
+#     else:
+#         print('Invalid ID')
 
 
 def remove_couriers(courier_list):
-    pass
+    util.loop_remove_items_from_list('courier', courier_list)
 
 
 # TESTS

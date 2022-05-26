@@ -14,7 +14,7 @@ def print_product_options():
     [3] - Update Existing Product
     [4] - Delete a Product
     
-    [0] - Back to Main Menu''')
+    [0] - Back to Main Menu\n''')
 
 
 # product option management function
@@ -27,7 +27,7 @@ def product_management(product_list):
     print_product_options()
 
     while running:
-        choice = input('\nPlease select an option:\n> ')
+        choice = input('Please select an option:\n> ')
 
         if choice == '0':
             running = False
@@ -41,17 +41,16 @@ def product_management(product_list):
 
         elif choice == '3':
             update_a_product(product_list)
-            print('update')
 
         elif choice == '4':
-            util.print_indexed_list('products', product_list)
+            remove_products(product_list)
 
         elif choice == 'r':
             cs.clear_screen()
             print_product_options()
 
         else:
-            print('Invalid selection.')
+            print('Invalid selection.\n')
 
 
 def add_products(product_list):
@@ -62,14 +61,21 @@ def add_products(product_list):
 
 def update_a_product(product_list):
     print('\n' + util.format_list_indexed(product_list))
-    index = util.get_int_input('Enter the index of the item to be updated:') - 1
+    index = util.get_int_input('Enter the ID of the product to be updated:') - 1
 
-    print(util.is_index_within_range(index, product_list))
+    if util.is_index_within_range(index, product_list):
+        new_product = util.format_string(util.get_string_input('\nEnter the new name:'))
 
+        print(f'{product_list[index]} is now {new_product}.\n')
+
+        util.update_item_in_list(new_product, index, product_list)
+
+    else:
+        print('Invalid ID\n')
 
 
 def remove_products(product_list):
-    util.loop_remove_items_from_list('courier', product_list)
+    util.loop_remove_items_from_list('product', product_list)
 
 
 # TESTS

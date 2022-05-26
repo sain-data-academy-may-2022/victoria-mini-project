@@ -45,7 +45,7 @@ def main_menu(product_list, courier_list, order_list):
             cf.courier_management(courier_list)
 
         elif choice == '3':
-            of.order_management(order_list)
+            of.order_management(product_list, courier_list, order_list)
 
         else:
             print('Invalid selection.')

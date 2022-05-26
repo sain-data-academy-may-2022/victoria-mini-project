@@ -1,6 +1,7 @@
 '''Module with functions to manage the orders list'''
 
 import modules.clear_screen as cs
+import modules.utilities as util
 
 ### data
 status = ['order placed',
@@ -9,6 +10,9 @@ status = ['order placed',
         'in-transit',
         'delivered']
 
+order_count = 0
+
+### main functions
 # print the order management menu options
 def print_order_options():
     '''Prints the order management menu options'''
@@ -25,7 +29,7 @@ def print_order_options():
 
 
 # order option management function
-def order_management(order_list):
+def order_management(product_list, courier_list, order_list):
     '''Maintains the loop for the order management menu'''
 
     running = True
@@ -34,6 +38,7 @@ def order_management(order_list):
     print_order_options()
 
     while running:
+
         choice = input('\nPlease select an option:\n> ')
 
         if choice == '0':
@@ -41,7 +46,7 @@ def order_management(order_list):
             return order_list
 
         elif choice == '1':
-            print('order list')
+            util.print_order_list(order_list, courier_list, status)
 
         elif choice == '2':
             print('new')
@@ -54,6 +59,11 @@ def order_management(order_list):
 
         elif choice == '5':
             print('delete')
+
+        elif choice == 'r':
+            cs.clear_screen()
+            print_order_options()
+
 
         else:
             print('Invalid selection.')
