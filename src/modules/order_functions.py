@@ -55,10 +55,11 @@ def order_management(product_list, courier_list, order_list):
 
         elif choice == '4':
             update_order_details(order_list, courier_list, status)
-            # print('Hi, this currently does nothing :)')
+            # print('Hi, this currently does nothing :)') AND NEEDS REFACTORING
 
         elif choice == '5':
-            print('Hi, this currently does nothing :)')
+            delete_an_order(order_list, status)
+            # print('Hi, this currently does nothing :)') AND NEEDS REFACTORING
 
         elif choice == 'r':
             cs.clear_screen()
@@ -74,14 +75,14 @@ def add_order(order_list: dict, courier_list: list):
     order_count = 0
     order_count = int(max(order_list.keys())) + 1
     new_order = {}
-    
-    new_order['customer_name'] = \
+
+    new_order['name'] = \
         util.format_string(input('\nPlease enter the customer\'s name:\n> '))
 
-    new_order['customer_address'] = \
+    new_order['address'] = \
         util.format_string(input('\nPlease enter the customer\'s address:\n> '))
 
-    new_order['customer_phone'] = \
+    new_order['phone'] = \
         util.format_string(input('\nPlease enter the customer\'s phone number:\n> '))
 
     util.print_indexed_list('courier', courier_list)
@@ -100,27 +101,35 @@ def update_order_status(order_list, status_list):
     util.print_short_order_list(order_list, status_list)
     updated_order = \
         util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
-    
+
     util.print_list_test(status)
-    
+
     updated_status = \
         util.get_int_within_list('\nEnter the status code for this order:', status) + 1
-    
+
     order_list[updated_order]['status'] = updated_status
 
 
-def update_order_details(order_list, courier_list, status):
-    util.print_order_list(order_list, courier_list, status)
+def update_order_details(order_list, courier_list, status_list):     # <--- TO DO ::: FIGURE OUT HOW TO ADD UPDATES FOR STATUS AND COURIER WITH LOGIC CHECKS
+    util.print_order_list(order_list, courier_list, status_list)
     updated_order = \
         util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
 
-    
+    for key in order_list[updated_order].keys():
+        if key == 'courier' or key == 'status':
+            continue
 
-    # for key, value in order_list[updated_order].items():
-    #     print(key, value)
+        else:
+            new_value = util.format_string(input(f'\nEnter a new {key} or ENTER to skip:\n> '))
+
+        if new_value != '':
+            order_list[updated_order][key] = new_value
 
 
-def delete_an_order(order_list):
-    pass
+def delete_an_order(order_list, status_list):
+    util.print_short_order_list(order_list, status_list)
+    deleted_order = \
+            util.get_dictionary_key('\nEnter the order number to be deleted:', order_list)
 
+    del order_list[deleted_order]
 

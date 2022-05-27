@@ -124,7 +124,7 @@ def print_short_order_list(order_list: dict,
 
     print('')
     for order in order_list:
-        print(f'Order {order}: {status[order_list[order]["status"]]} {order_list[order]["customer_name"]}')
+        print(f'Order {order}: {status[order_list[order]["status"]]} {order_list[order]["name"]}')
 
 
 # prints a given order in a specified format
@@ -135,9 +135,9 @@ def print_an_order(order_id: str,
     '''prints a formatted order'''
 
     print(f'Order Number: {order_id}')
-    print(f'\n   Name:  {order["customer_name"]}')
-    print(f'Address:  {order["customer_address"]}')
-    print(f'  Phone:  {order["customer_phone"]}')
+    print(f'\n   Name:  {order["name"]}')
+    print(f'Address:  {order["address"]}')
+    print(f'  Phone:  {order["phone"]}')
     try:
         print(f'Courier:  {courier_list[order["courier"]]}')
     except IndexError:
@@ -229,11 +229,11 @@ def get_int_input(question: str):
             print('Please enter a valid number.')
 
 
-# takes a question and gets an integer but only returns it 
+# takes a question and gets an integer but only returns it
 # if the integer exists within a list
 def get_int_within_list(question: str, a_list:list):
     '''Gets an input question and returns an integer if it is an index within a list'''
-    
+
     index = get_int_input(question) - 1
 
     if is_index_within_range(index, a_list):
@@ -255,13 +255,11 @@ def get_string_input(question: str):
 
         else:
             print('Invalid input.\n')
-        get_int_within_list(question, a_list)
-
 
 # takes a question and returns a string if it is a key within a dictionary
 def get_dictionary_key(question: str, a_dict: dict):
     '''Gets an input question and dict and returns a string if it is a key within that dictionary'''
-    
+
     key = get_string_input(question)
 
     if is_string_a_key(key, a_dict):
