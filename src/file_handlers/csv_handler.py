@@ -9,12 +9,13 @@ def load_products():
     with open('data/products.csv', 'r') as file:
         csv_file = csv.DictReader(file)
         for row in csv_file:
+            row['price'] = float(row['price'])
             product_list.append(row)
 
     return product_list
 
 # receives a list and writes out products.csv file
-def write_products(a_list):
+def write_products(product_list):
     '''write out a list in a products.csv file'''
     with open('data/products.csv', 'w') as file:
         fieldnames = ['name', 'price']
@@ -36,7 +37,7 @@ def load_couriers():
     return courier_list
 
 # receives a list and writes out products.csv file
-def write_couriers(a_list):
+def write_couriers(courier_list):
     '''write out a list in a couriers.csv file'''
     with open('data/couriers.csv', 'w') as file:
         fieldnames = ['name', 'phone']
@@ -53,7 +54,6 @@ def load_orders():
     with open('data/orders.csv', 'r') as file:
         csv_file = csv.DictReader(file)
         for row in csv_file:
-            # print(int(row['status']))
             row['courier'] = int(row['courier'])
             row['status'] = int(row['status'])
             order_list.append(row)

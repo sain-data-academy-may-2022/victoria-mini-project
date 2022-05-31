@@ -28,9 +28,9 @@
         "status": 0
     },
     "6": {
-        "name": "George",
-        "address": "Room 220, The Ritz",
-        "phone": "Contact The Butler",
+        "name": "Sweeny Todd",
+        "address": "186 Fleet Street",
+        "phone": "",
         "courier": 0,
         "status": 1
     }
