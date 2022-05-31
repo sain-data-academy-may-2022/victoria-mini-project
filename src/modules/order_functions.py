@@ -61,7 +61,7 @@ def order_management(product_list, courier_list, order_list):
             delete_an_order(order_list, status)
             # print('Hi, this currently does nothing :)') AND NEEDS REFACTORING
 
-        elif choice == 'r':
+        elif choice == 'r' or choice == 'c':
             cs.clear_screen()
             print_order_options()
 
@@ -92,7 +92,12 @@ def add_order(order_list: dict, courier_list: list):
 
     new_order['status'] = 0
 
-    order_list[str(order_count)] = new_order
+    util.print_an_order(str(order_count),new_order,courier_list,status)
+
+    confirm = input('\nPress ENTER to confirm adding this order, or 0 to cancel:\n> ')
+    
+    if confirm == '':
+        order_list[str(order_count)] = new_order
 
     return order_list
 
@@ -130,6 +135,10 @@ def delete_an_order(order_list, status_list):
     util.print_short_order_list(order_list, status_list)
     deleted_order = \
             util.get_dictionary_key('\nEnter the order number to be deleted:', order_list)
+    
+    confirm = input('Press ENTER to confirm, or 0 to cancel.\n> ')
 
-    del order_list[deleted_order]
+    if confirm == '':
+        del order_list[deleted_order]
+        print('This order has been deleted.')
 

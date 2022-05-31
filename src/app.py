@@ -1,4 +1,5 @@
 ### imports
+from math import prod
 from file_handlers.csv_handler import load_couriers, write_couriers, \
                                         load_products, write_products
 from file_handlers.json_handler import load_orders, write_orders
@@ -9,8 +10,13 @@ products = load_products()
 couriers = load_couriers()
 orders = load_orders()
 
+print(products)
+print(couriers)
+print(orders)
+
+
 # main program file
-products, couriers, orders = main_menu(products, couriers, orders)
+# products, couriers, orders = main_menu(products, couriers, orders)
 
 # save files and exit
 # write_products(products)
