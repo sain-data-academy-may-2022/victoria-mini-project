@@ -1,7 +1,8 @@
 ### imports
 from file_handlers.csv_handler import load_couriers, write_couriers, \
-                                        load_products, write_products, \
-                                            load_orders, write_orders
+                                        load_products, write_products#, \
+                                            #load_orders, write_orders
+from file_handlers.json_handler import load_orders, write_orders
 from modules.main_menu import main_menu
 
 # load files

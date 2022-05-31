@@ -45,7 +45,7 @@ def product_management(product_list):
         elif choice == '4':
             remove_products(product_list)
 
-        elif choice == 'r':
+        elif choice == '':
             cs.clear_screen()
             print_product_options()
 
@@ -56,7 +56,7 @@ def product_management(product_list):
 def add_products(product_list):
     '''Loop which adds a product to a product list'''
 
-    util.loop_add_items_to_list('product', product_list)
+    util.loop_add_items_to_list('product', ['name', 'price'], product_list)
 
 
 def update_a_product(product_list):         # <---- REFACTOR

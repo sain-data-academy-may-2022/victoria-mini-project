@@ -47,9 +47,9 @@ def main_menu(product_list, courier_list, order_list):
         elif choice == '3':
             of.order_management(product_list, courier_list, order_list)
 
-        # elif choice == '':
-        #     cs.clear_screen()
-        #     print_main_menu()
+        elif choice == '':
+            cs.clear_screen()
+            print_main_menu()
 
         else:
             print('Invalid selection.')

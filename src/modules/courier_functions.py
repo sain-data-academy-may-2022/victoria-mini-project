@@ -45,7 +45,7 @@ def courier_management(courier_list):
         elif choice == '4':
             remove_couriers(courier_list)
 
-        elif choice == 'r':
+        elif choice == '':
             cs.clear_screen()
             print_courier_options()
 
@@ -56,7 +56,7 @@ def courier_management(courier_list):
 def add_couriers(courier_list):
     '''Loop which adds a courier to a courier list'''
 
-    util.loop_add_items_to_list('courier', courier_list)
+    util.loop_add_items_to_list('courier', ['name', 'phone'], courier_list)
 
 
 def update_a_courier(courier_list):         # <---- REFACTOR

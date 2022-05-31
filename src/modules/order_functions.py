@@ -61,7 +61,7 @@ def order_management(product_list, courier_list, order_list):
             delete_an_order(order_list, status)
             # print('Hi, this currently does nothing :)') AND NEEDS REFACTORING
 
-        elif choice == 'r' or choice == 'c':
+        elif choice == '':
             cs.clear_screen()
             print_order_options()
 
@@ -107,7 +107,7 @@ def update_order_status(order_list, status_list):
     updated_order = \
         util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
 
-    util.print_list_test(status)
+    util.print_list_test(status, 0)
 
     updated_status = \
         util.get_int_within_list('\nEnter the status code for this order:', status) + 1

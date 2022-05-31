@@ -41,7 +41,7 @@ def is_string_a_key(text: str, a_dict: dict):
 #
 ### LISTS
 # add an item to a list
-def add_item_to_list(item: str, a_list: list):
+def add_item_to_list(item: dict, a_list: list):
     '''Adds an item to a list'''
 
     a_list.append(item)
@@ -50,25 +50,33 @@ def add_item_to_list(item: str, a_list: list):
 
 
 # loop for repeatedly adding items to a list
-def loop_add_items_to_list(type_of_item: str, a_list: list):
+def loop_add_items_to_list(type_of_item: str, item_keys: list, a_list: list):
     '''Loops through adding items to a list and returns that list'''
 
-    print_plain_list((type_of_item + 's'), a_list)
+    print(format_list(a_list))
 
-    while True:
+    running = True
 
-        new_item = format_string(input(f'Enter new {type_of_item} or enter 0 to cancel:\n> '))
+    new_item = {}
 
-        if new_item == '0':
-            print('')
-            break
+    while running:
+        for key in item_keys:
+            value = get_string_input(f'\nEnter new {type_of_item} {key} or enter 0 to cancel:')
 
-        elif len(new_item) > 0:
-            a_list = add_item_to_list(new_item, a_list)
-            print(f'\n{a_list[-1]} has been added.\n')
+            if value == '0':
+                running = False
+                break
 
+            else:
+                if key == 'price':
+                    new_item[key] = float(value)
+
+                else:
+                    new_item[key] = value
+            
         else:
-            print(f'Please enter a valid {type_of_item} name.\n')
+            add_item_to_list(new_item, a_list)
+            print(f'{a_list[-1]["name"]} has been added to the {type_of_item} list.')
 
     return a_list
 
@@ -139,7 +147,7 @@ def print_an_order(order_id: str,
     print(f'Address:  {order["address"]}')
     print(f'  Phone:  {order["phone"]}')
     try:
-        print(f'Courier:  {courier_list[order["courier"]]}')
+        print(f'Courier:  {courier_list[order["courier"]]["name"]}')
     except IndexError:
         print('Courier:  Unknown')
 
@@ -158,8 +166,8 @@ def print_order_list(order_list: dict,
 
 
 # prints a list with indexes starting at 0
-def print_list_test(a_list):    # <--- TO DO - rename
-    for index, name in enumerate(a_list):
+def print_list_test(a_list, start):    # <--- TO DO - rename
+    for index, name in enumerate(a_list, start):
         print(f'{index} - {name}')
 
 
@@ -188,8 +196,14 @@ def format_list(a_list: list):
 
     list_string = '\n'
 
-    for each in a_list:
-        list_string += ('\t' + each + '\n')
+    for line in a_list:
+        for key in line.keys():
+            if key == 'name':
+                list_string += f'{line[key]:>21}'
+            elif key == 'price':
+                list_string += f': £{line[key]:.2f}' + '\n'
+            else:
+                list_string += f': {line[key]}' + '\n'
 
     return list_string
 
@@ -197,11 +211,17 @@ def format_list(a_list: list):
 # returns a formatted string of indexed list items for a given list
 def format_list_indexed(a_list: list):
     '''Returns a formatted string for a list with the index and name'''
-    list_string = 'ID\tName\n'
+    list_string = f'ID Name\n'
 
-    for each in a_list:
-        index = str( a_list.index(each) + 1 )
-        list_string += (index + '\t' + each + '\n')
+    for line in a_list:
+        list_string += f'{a_list.index(line) + 1:>2}'
+        for key in line.keys():
+            if key == 'name':
+                list_string += f' {line[key]:.<18}'
+            elif key == 'price':
+                list_string += f': £{line[key]:.2f}' + '\n'
+            else:
+                list_string += f': {line[key]}' + '\n'
 
     return list_string
 
