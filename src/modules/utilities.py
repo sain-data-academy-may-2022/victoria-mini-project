@@ -53,15 +53,13 @@ def add_item_to_list(item: dict, a_list: list):
 def loop_add_items_to_list(type_of_item: str, item_keys: list, a_list: list):
     '''Loops through adding items to a list and returns that list'''
 
-    print(format_list(a_list))
-
     running = True
 
     new_item = {}
 
     while running:
         for key in item_keys:
-            value = get_string_input(f'\nEnter new {type_of_item} {key} or enter 0 to cancel:')
+            value = format_string(get_string_input(f'\nEnter new {type_of_item} {key} or enter 0 to cancel:'))
 
             if value == '0':
                 running = False
@@ -81,13 +79,29 @@ def loop_add_items_to_list(type_of_item: str, item_keys: list, a_list: list):
     return a_list
 
 
-# update an item within a list
+# update a specific item within a list
 def update_item_in_list(item: str, index: int, a_list: list):
     '''Replaces the list item at a specific index with a new value'''
 
     a_list[index] = item
 
     return a_list
+
+
+# get updated values for iten within a list
+def get_updated_item_values(item: dict):
+    '''receives a dict and returns an updated dict'''
+    new_item = {}
+
+    for key, value in item.items():
+        new_value = get_updated_value(value, key)
+
+        if key == 'price':
+            new_value = float(new_value)
+
+        new_item[key] = new_value
+
+    return new_item
 
 
 # remove an item from a list
@@ -112,7 +126,7 @@ def loop_remove_items_from_list(type_of_item: str, a_list: list):
             break
 
         elif is_index_within_range(index, a_list):
-            print(f'{a_list[index]} has been removed.')
+            print(f'{a_list[index]["name"]} has been removed.')
             remove_item_from_list(index, a_list)
 
     else:
@@ -229,7 +243,7 @@ def format_list_indexed(a_list: list):
 # formats a string for proper insertion in a list or dictionary
 def format_string(text: str):
     '''Formats a given string for proper insertion'''
-    return text.strip().title()
+    return text.strip(' £\n\t').title()
 #
 #
 #
@@ -276,6 +290,18 @@ def get_string_input(question: str):
             print('Invalid input.\n')
 
 
+# takes a value and string and gets a user input, if the input is blank returns original value, otherwise new value
+def get_updated_value(orig_value, type_of_item: str):
+    '''Takes a string for a user input question and a value of any type. Returns the new value if the user input is not blank'''
+
+    new_value = format_string(input(f'\nEnter new {type_of_item} or press ENTER to skip:\n> '))
+
+    if new_value == '':
+        return orig_value
+    else:
+        return new_value
+
+
 # takes a question and returns a string if it is a key within a dictionary
 def get_dictionary_key(question: str, a_dict: dict):
     '''Gets an input question and dict and returns a string if it is a key within that dictionary'''
@@ -286,3 +312,22 @@ def get_dictionary_key(question: str, a_dict: dict):
         return key
     else:
         get_dictionary_key(question, a_dict)
+
+
+# gets input for every item in a list and returns it as a key-value dictionary
+def get_dict_of_inputs(adjective: str, type_of_item: str, key_list: list):          # UNUSED
+    '''takes a list of keys and returns a dictionary of keys and values'''
+
+    values_list = []
+
+    for key in key_list:
+        new_value = format_string(get_string_input(f'Enter {adjective} {type_of_item} {key}:'))
+
+        if key == 'price':
+            new_value = float(new_value)
+
+        values_list.append(new_value)
+
+    new_dict = dict(zip(key_list, values_list))
+
+    return new_dict

@@ -55,19 +55,22 @@ def courier_management(courier_list):
 
 def add_couriers(courier_list):
     '''Loop which adds a courier to a courier list'''
+    
+    print(util.format_list(courier_list))
 
     util.loop_add_items_to_list('courier', ['name', 'phone'], courier_list)
 
 
+# update a specific item within a list
 def update_a_courier(courier_list):         # <---- REFACTOR
-    '''generic docstring'''
+    ''''''
+    
     print('\n' + util.format_list_indexed(courier_list))
     index = util.get_int_input('Enter the ID of the courier to be updated:') - 1
 
     if util.is_index_within_range(index, courier_list):
-        new_courier = util.format_string(util.get_string_input('\nEnter the new name:'))
 
-        print(f'{courier_list[index]} is now {new_courier}.\n')
+        new_courier = util.get_updated_item_values(courier_list[index])
 
         util.update_item_in_list(new_courier, index, courier_list)
 

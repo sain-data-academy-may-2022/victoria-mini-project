@@ -56,18 +56,27 @@ def product_management(product_list):
 def add_products(product_list):
     '''Loop which adds a product to a product list'''
 
+    print(util.format_list(product_list))
+
     util.loop_add_items_to_list('product', ['name', 'price'], product_list)
 
 
+# update a specific item within a list
 def update_a_product(product_list):         # <---- REFACTOR
-    '''generic docstring'''
+    ''''''
+    
     print('\n' + util.format_list_indexed(product_list))
     index = util.get_int_input('Enter the ID of the product to be updated:') - 1
 
     if util.is_index_within_range(index, product_list):
-        new_product = util.format_string(util.get_string_input('\nEnter the new name:'))
 
-        print(f'{product_list[index]} is now {new_product}.\n')
+        new_product = util.get_updated_item_values(product_list[index])
+
+        if new_product['name'] != product_list[index]['name']:
+            print(f'{product_list[index]["name"]} is now {new_product["name"]}.\n')
+
+        if 'price' in new_product.keys() and (new_product['price'] != product_list[index]['price']):
+            print(f'Price of {new_product["name"]} is now £{new_product["price"]:.2f}.\n')
 
         util.update_item_in_list(new_product, index, product_list)
 
