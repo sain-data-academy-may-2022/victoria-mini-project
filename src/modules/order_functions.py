@@ -92,7 +92,8 @@ def add_order(order_list: dict, product_list: list, courier_list: list):
 
     new_order['status'] = 0
 
-    new_order['items'] = util.get_products_for_order(product_list)
+    new_order['items'] = \
+        util.get_products_for_order(product_list)
 
     util.print_an_order(str(order_count),new_order,product_list,courier_list,status)
 
@@ -109,10 +110,10 @@ def update_order_status(order_list, status_list):
     updated_order = \
         util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
 
-    util.print_list_test(status, 0)
+    util.print_list_test(status, 1)
 
     updated_status = \
-        util.get_int_within_list('\nEnter the status code for this order:', status) + 1
+        util.get_int_within_list('\nEnter the status code for this order:', status)
 
     order_list[updated_order]['status'] = updated_status
 
@@ -123,8 +124,22 @@ def update_order_details(order_list, product_list, courier_list, status_list):  
         util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
 
     for key in order_list[updated_order].keys():
-        if key == 'courier' or key == 'status' or key == 'items':
-            continue
+
+        if key == 'courier' or key == 'status':
+            if key == 'courier':
+                print('\n', util.format_list_indexed(courier_list))
+
+            elif key == 'status':
+                util.print_list_test(status, 1)
+
+            new_value = util.format_string(input(f'\nEnter a new {key} or ENTER to skip:\n> '))
+            if new_value != '':
+                new_value = int(new_value) - 1
+
+        elif key == 'items':
+            new_value = util.get_products_for_order(product_list)
+            if new_value == []:
+                new_value = ''
 
         else:
             new_value = util.format_string(input(f'\nEnter a new {key} or ENTER to skip:\n> '))
