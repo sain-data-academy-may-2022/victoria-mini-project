@@ -1,10 +1,12 @@
 '''utility functions for handling data within the app'''
-#
-#
-#
-#
-#
+
+
+
+
+
+####################
 ### BOOL CHECKS
+####################
 # checks if a list has items or not
 def check_list_has_items(a_list: list):
     '''If a list has items, returns True. Otherwise returns False.'''
@@ -28,18 +30,53 @@ def is_string_a_key(text: str, a_dict: dict):
     '''returns True is a string exists as a key in a dictionary'''
 
     return text in a_dict
-#
-#
-#
-#
-#
+
+
+
+
+
+####################
 ### ORDERS
+####################
 #
-#
-#
-#
-#
+def get_products_for_order(product_list):
+    ''''''
+    print('\n', format_list_indexed(product_list))
+
+    running = True
+
+    items = []
+    
+    while running:
+        new_item = get_int_input('\nEnter the ID of the product, or 0 to cancel:')
+
+        if new_item == 0:
+            print('\nCurrent items:')
+
+            for each in items:
+                print(f'\t{product_list[each]["name"]}')
+
+            loop = input('\nPress ENTER to confirm these items, or 0 to add more:\n> ')
+            
+            if loop == '':
+                running = False
+
+        elif is_index_within_range(new_item - 1, product_list):
+            items.append(new_item - 1)
+            print(f'{product_list[new_item - 1]["name"]} has been added.')
+
+    return items
+
+
+
+
+
+
+
+
+####################
 ### LISTS
+####################
 # add an item to a list
 def add_item_to_list(item: dict, a_list: list):
     '''Adds an item to a list'''
@@ -94,7 +131,7 @@ def get_updated_item_values(item: dict):
     new_item = {}
 
     for key, value in item.items():
-        new_value = get_updated_value(value, key)
+        new_value = get_an_updated_value(value, key)
 
         if key == 'price':
             new_value = float(new_value)
@@ -133,12 +170,14 @@ def loop_remove_items_from_list(type_of_item: str, a_list: list):
         print(format_list(a_list))
 
     return a_list
-#
-#
-#
-#
-#
+
+
+
+
+
+####################
 ### FORMATTING AND PRINTING
+####################
 # prints a shortened form of an order dictionary
 def print_short_order_list(order_list: dict,
                             status: list):
@@ -152,6 +191,7 @@ def print_short_order_list(order_list: dict,
 # prints a given order in a specified format
 def print_an_order(order_id: str,
                 order: dict,
+                product_list: list,
                 courier_list: list,
                 status: list):
     '''prints a formatted order'''
@@ -160,6 +200,10 @@ def print_an_order(order_id: str,
     print(f'\n   Name:  {order["name"]}')
     print(f'Address:  {order["address"]}')
     print(f'  Phone:  {order["phone"]}')
+    if len(order["items"]) > 0:
+        print(f'Ordered:  {product_list[order["items"][0]]["name"]}') 
+        for each in range(1,len(order["items"])):
+            print(f'          ' + f'{product_list[order["items"][each]]["name"]}')
     try:
         print(f'Courier:  {courier_list[order["courier"]]["name"]}')
     except IndexError:
@@ -170,13 +214,14 @@ def print_an_order(order_id: str,
 
 # print a formatted order dictionary
 def print_order_list(order_list: dict,
+                    product_list: list,
                     courier_list: list,
                     status: list):
     '''prints a formatted list of everything in orders'''
-    print('------')
+    print('----------------')
     for order in order_list:
-        print_an_order(order, order_list[order], courier_list, status)
-        print('------')
+        print_an_order(order, order_list[order], product_list, courier_list, status)
+        print('----------------')
 
 
 # prints a list with indexes starting at 0
@@ -244,12 +289,14 @@ def format_list_indexed(a_list: list):
 def format_string(text: str):
     '''Formats a given string for proper insertion'''
     return text.strip(' £\n\t').title()
-#
-#
-#
-#
-#
+
+
+
+
+
+####################
 ### INPUTS
+####################
 # takes a question to ask and returns an integer response
 def get_int_input(question: str):
     '''Gets an input question and returns an integer is the input can be converted'''
@@ -291,7 +338,7 @@ def get_string_input(question: str):
 
 
 # takes a value and string and gets a user input, if the input is blank returns original value, otherwise new value
-def get_updated_value(orig_value, type_of_item: str):
+def get_an_updated_value(orig_value, type_of_item: str):
     '''Takes a string for a user input question and a value of any type. Returns the new value if the user input is not blank'''
 
     new_value = format_string(input(f'\nEnter new {type_of_item} or press ENTER to skip:\n> '))

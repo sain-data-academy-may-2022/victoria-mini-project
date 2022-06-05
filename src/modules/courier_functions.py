@@ -74,6 +74,8 @@ def update_a_courier(courier_list):         # <---- REFACTOR
 
         util.update_item_in_list(new_courier, index, courier_list)
 
+        return courier_list
+
     else:
         print('Invalid ID\n')
 

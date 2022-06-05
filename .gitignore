@@ -1,3 +1,5 @@
 backups/
 project-guides/
 __pycache__/
+tests/
+.pytest_cache/

@@ -45,16 +45,16 @@ def order_management(product_list, courier_list, order_list):
             return order_list
 
         elif choice == '1':
-            util.print_order_list(order_list, courier_list, status)
+            util.print_order_list(order_list, product_list, courier_list, status)
 
         elif choice == '2':
-            add_order(order_list, courier_list)
+            add_order(order_list, product_list, courier_list)
 
         elif choice == '3':
             update_order_status(order_list, status)
 
         elif choice == '4':
-            update_order_details(order_list, courier_list, status)
+            update_order_details(order_list, product_list, courier_list, status)
             # print('Hi, this currently does nothing :)') AND NEEDS REFACTORING
 
         elif choice == '5':
@@ -70,7 +70,7 @@ def order_management(product_list, courier_list, order_list):
             print('Invalid selection.')
 
 
-def add_order(order_list: dict, courier_list: list):
+def add_order(order_list: dict, product_list: list, courier_list: list):
     '''generic docstring'''
     order_count = 0
     order_count = int(max(order_list.keys())) + 1
@@ -92,7 +92,9 @@ def add_order(order_list: dict, courier_list: list):
 
     new_order['status'] = 0
 
-    util.print_an_order(str(order_count),new_order,courier_list,status)
+    new_order['items'] = util.get_products_for_order(product_list)
+
+    util.print_an_order(str(order_count),new_order,product_list,courier_list,status)
 
     confirm = input('\nPress ENTER to confirm adding this order, or 0 to cancel:\n> ')
     
@@ -115,13 +117,13 @@ def update_order_status(order_list, status_list):
     order_list[updated_order]['status'] = updated_status
 
 
-def update_order_details(order_list, courier_list, status_list):     # <--- TO DO ::: FIGURE OUT HOW TO ADD UPDATES FOR STATUS AND COURIER WITH LOGIC CHECKS
-    util.print_order_list(order_list, courier_list, status_list)
+def update_order_details(order_list, product_list, courier_list, status_list):     # <--- TO DO ::: FIGURE OUT HOW TO ADD UPDATES FOR STATUS AND COURIER WITH LOGIC CHECKS
+    util.print_order_list(order_list, product_list, courier_list, status_list)
     updated_order = \
         util.get_dictionary_key('\nEnter the order number to be updated:', order_list)
 
     for key in order_list[updated_order].keys():
-        if key == 'courier' or key == 'status':
+        if key == 'courier' or key == 'status' or key == 'items':
             continue
 
         else:
