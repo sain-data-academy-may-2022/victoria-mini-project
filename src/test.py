@@ -1,22 +1,18 @@
+import csv
+
 test = []
-###
-# id = input('get input: ')
 
-# id = int(id) - 1
+items = [{  'name': 'Tea',
+            'price': 1.80},
+        {   'name': 'Coffee',
+            'price': 2.20},
+        {   'name': 'Waffles',
+            'price': 4.50}
+        ]
 
-# test.pop(id)
+with open('data/products-2.csv', 'w') as items_file:
+    for item in items:
+      items_file.write(item + '\n')
 
-# print(test)
-###
 
-###
-print(test)
-while test:
-    # index = input('enter id: ')
-    # int(index)
-    test.pop(0)
-    print(test)
-else:
-    print('list is empty')
-
-###
+print(items)

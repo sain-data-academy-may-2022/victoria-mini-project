@@ -243,7 +243,6 @@ def get_int_within_list(question: str, a_list:list):
         get_int_within_list(question, a_list)
 
 
-
 # takes a question to ask and returns a string response
 def get_string_input(question: str):
     '''Gets an input question and returns a non-empty string'''
@@ -255,6 +254,7 @@ def get_string_input(question: str):
 
         else:
             print('Invalid input.\n')
+
 
 # takes a question and returns a string if it is a key within a dictionary
 def get_dictionary_key(question: str, a_dict: dict):
