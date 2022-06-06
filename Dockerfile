@@ -15,3 +15,6 @@ EXPOSE 80
 
 # Execute this command on start
 ENTRYPOINT ["python3", "src/app.py"]
+
+# Command to run
+# docker run -it victoria-mini-project /bin/bash

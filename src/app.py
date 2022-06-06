@@ -14,9 +14,9 @@ orders = load_orders()
 products, couriers, orders = main_menu(products, couriers, orders)
 
 # save files and exit
-# write_products(products)
-# write_couriers(couriers)
-# write_orders(orders)
+write_products(products)
+write_couriers(couriers)
+write_orders(orders)
 print('\nClosing program, goodbye!\n')
 
 
