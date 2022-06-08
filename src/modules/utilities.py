@@ -92,28 +92,25 @@ def loop_add_items_to_list(type_of_item: str, item_keys: list, a_list: list):
 
     running = True
 
-    new_item = {}
-
     while running:
+        new_item = {}
+
         for key in item_keys:
             value = format_string(get_string_input(f'\nEnter new {type_of_item} {key} or enter 0 to cancel:'))
 
             if value == '0':
                 running = False
-                break
+                return a_list
 
             else:
                 if key == 'price':
-                    new_item[key] = float(value)
+                    new_item[key] = float(value) ### TO DO: Add control for input
 
                 else:
                     new_item[key] = value
             
-        else:
-            add_item_to_list(new_item, a_list)
-            print(f'{a_list[-1]["name"]} has been added to the {type_of_item} list.')
-
-    return a_list
+        a_list = add_item_to_list(new_item, a_list)
+        print(f'{a_list[-1]["name"]} has been added to the {type_of_item} list.')
 
 
 # update a specific item within a list

@@ -107,12 +107,15 @@ def test_get_int_input(mock_input):
     actual = util.get_int_input(test_q)
 
     assert expected == actual
-    
+  
 # @patch('builtins.input', side_effect = ['test'])
 # @patch('builtins.print')
-# def test_get_int_input(mock_print, mock_input):
+# def test_get_int_input_string(mock_print, mock_input):
 #     test_q = 'sample input'
     
 #     util.get_int_input(test_q)
 
-#     mock_print.assert_called_with('Please enter a valid number.')
+#     mock_print.assert_has_calls([
+#         call('sample input\n> '),
+#         call('Please enter a valid number.')
+#     ])
