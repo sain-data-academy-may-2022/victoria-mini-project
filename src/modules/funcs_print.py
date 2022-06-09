@@ -1,7 +1,7 @@
-'''Module while handles all print functions within the app'''
+'''Module which handles all print functions within the app'''
 
 ####################
-### FORMATTING AND PRINTING
+##### PRINTING #####
 ####################
 # print a non-indexed list for a provided list of dicts
 def _print_non_indexed(data_list: list):

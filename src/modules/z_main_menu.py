@@ -22,7 +22,7 @@ def print_main_menu():
 
 
 # main menu function
-def main_menu(product_list, courier_list, order_list):
+def main_menu_loop(product_list, courier_list, order_list):
     '''Maintains the loop for the main menu'''
 
     running = True
@@ -32,28 +32,32 @@ def main_menu(product_list, courier_list, order_list):
 
     while running:
 
+        running = main_menu(product_list, courier_list, order_list)
 
-        choice = input('\nPlease select an option:\n> ')
 
-        if choice == '0':
-            cs.clear_screen()
-            running = False
-            return product_list, courier_list, order_list
+def main_menu():
 
-        elif choice == '1':
-            pf.product_management(product_list)
+    choice = input('\nPlease select an option:\n> ')
 
-        elif choice == '2':
-            cf.courier_management(courier_list)
+    if choice == '0':
+        cs.clear_screen()
+        running = False
+        return product_list, courier_list, order_list
 
-        elif choice == '3':
-            of.order_management(product_list, courier_list, order_list)
+    elif choice == '1':
+        pf.product_management(product_list)
 
-        elif choice == '':
-            cs.clear_screen()
-            print_main_menu()
+    elif choice == '2':
+        cf.courier_management(courier_list)
 
-        else:
-            cs.clear_screen()
-            print_main_menu()
-            print('\nInvalid selection.')
+    elif choice == '3':
+        of.order_management(product_list, courier_list, order_list)
+
+    elif choice == '':
+        cs.clear_screen()
+        print_main_menu()
+
+    else:
+        cs.clear_screen()
+        print_main_menu()
+        print('\nInvalid selection.')

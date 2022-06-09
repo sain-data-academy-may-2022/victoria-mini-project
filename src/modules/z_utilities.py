@@ -238,7 +238,7 @@ def print_plain_list(item_type: str, a_list: list):
         print(format_list(a_list))
     else:
         print(f'\nThere are no {item_type} currently listed.\n')
-
+## reimplemented
 
 # print a list with indexes
 def print_indexed_list(item_type: str, a_list: list):
@@ -247,7 +247,7 @@ def print_indexed_list(item_type: str, a_list: list):
         print('\n' + format_list_indexed(a_list))
     else:
         print(f'\nThere are no {item_type} currently listed.\n')
-
+## reimplemented
 
 # returns a formatted string of list items for a given list
 def format_list(a_list: list):
@@ -265,7 +265,7 @@ def format_list(a_list: list):
                 list_string += f': {line[key]}' + '\n'
 
     return list_string
-
+## reimplemented
 
 # returns a formatted string of indexed list items for a given list
 def format_list_indexed(a_list: list):
@@ -283,13 +283,13 @@ def format_list_indexed(a_list: list):
                 list_string += f': {line[key]}' + '\n'
 
     return list_string
-
+## reimplemented
 
 # formats a string for proper insertion in a list or dictionary
 def format_string(text: str):
     '''Formats a given string for proper insertion'''
     return text.strip(' £\n\t').title()
-
+## reimplemented
 
 
 
