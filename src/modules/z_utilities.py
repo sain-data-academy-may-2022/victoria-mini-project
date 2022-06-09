@@ -261,7 +261,7 @@ def format_list(a_list: list):
                 list_string += f'{line[key]:>21}'
             elif key == 'price':
                 list_string += f': £{line[key]:.2f}' + '\n'
-            else:
+            elif key == 'phone':
                 list_string += f': {line[key]}' + '\n'
 
     return list_string
@@ -279,7 +279,7 @@ def format_list_indexed(a_list: list):
                 list_string += f' {line[key]:.<18}'
             elif key == 'price':
                 list_string += f': £{line[key]:.2f}' + '\n'
-            else:
+            elif key == 'phone':
                 list_string += f': {line[key]}' + '\n'
 
     return list_string

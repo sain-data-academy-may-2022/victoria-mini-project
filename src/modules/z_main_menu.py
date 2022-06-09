@@ -1,5 +1,6 @@
 '''Module with functions to manage the main menu'''
 
+# imports 
 import modules.clear_screen as cs
 import modules.product_functions as pf
 import modules.courier_functions as cf
@@ -26,10 +27,11 @@ def main_menu(product_list, courier_list, order_list):
 
     running = True
 
+    cs.clear_screen()
+    print_main_menu()
+
     while running:
 
-        cs.clear_screen()
-        print_main_menu()
 
         choice = input('\nPlease select an option:\n> ')
 
@@ -52,4 +54,6 @@ def main_menu(product_list, courier_list, order_list):
             print_main_menu()
 
         else:
-            print('Invalid selection.')
+            cs.clear_screen()
+            print_main_menu()
+            print('\nInvalid selection.')

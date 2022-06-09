@@ -5,7 +5,10 @@
         "phone": "07700 123 456",
         "courier": 1,
         "status": 4,
-        "items": [1, 3]
+        "items": [
+            1,
+            3
+        ]
     },
     "2": {
         "name": "Phileas Fogg",
@@ -13,7 +16,13 @@
         "phone": "07700 987 321",
         "courier": 1,
         "status": 1,
-        "items": [1, 4, 6, 12, 8]
+        "items": [
+            1,
+            4,
+            6,
+            12,
+            8
+        ]
     },
     "3": {
         "name": "Wallace and Gromit",
@@ -21,7 +30,11 @@
         "phone": "07700 232 787",
         "courier": 8,
         "status": 0,
-        "items": [0, 2, 4]
+        "items": [
+            0,
+            2,
+            4
+        ]
     },
     "4": {
         "name": "Keith and Jim",
@@ -29,7 +42,14 @@
         "phone": "0800 00 1066",
         "courier": 1,
         "status": 0,
-        "items": [5, 10, 9, 6, 8, 11]
+        "items": [
+            5,
+            10,
+            9,
+            6,
+            8,
+            11
+        ]
     },
     "6": {
         "name": "Sweeny Todd",
@@ -37,6 +57,14 @@
         "phone": "",
         "courier": 0,
         "status": 1,
-        "items": [1, 7, 12, 12, 12, 12, 12]
+        "items": [
+            1,
+            7,
+            12,
+            12,
+            12,
+            12,
+            12
+        ]
     }
 }
