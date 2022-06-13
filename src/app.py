@@ -1,28 +1,23 @@
+'''Main program file'''
+
 ### imports
-from math import prod
 from file_handlers.csv_handler import load_couriers, write_couriers, \
                                         load_products, write_products
 from file_handlers.json_handler import load_orders, write_orders
-from modules.main_menu import main_menu
+from db.db import db_query, get_connection, close_connection
+from modules.menu_main import main_menu
 
-# load files
-products = load_products()
-couriers = load_couriers()
-orders = load_orders()
+### load database connection
+connection = get_connection()
 
-print(products)
-print(couriers)
-print(orders)
+### load files
 
 
-# main program file
-# products, couriers, orders = main_menu(products, couriers, orders)
+### main program file
 
-# save files and exit
-# write_products(products)
-# write_couriers(couriers)
-# write_orders(orders)
+
+### save files amd exit
+
+close_connection(connection)
+
 print('\nClosing program, goodbye!\n')
-
-
-## DEV AREA

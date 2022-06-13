@@ -4,34 +4,67 @@
         "address": "221b Baker Street",
         "phone": "07700 123 456",
         "courier": 1,
-        "status": 4
+        "status": 4,
+        "items": [
+            1,
+            3
+        ]
     },
     "2": {
         "name": "Phileas Fogg",
         "address": "7 Savile Row",
         "phone": "07700 987 321",
         "courier": 1,
-        "status": 1
+        "status": 1,
+        "items": [
+            1,
+            4,
+            6,
+            12,
+            8
+        ]
     },
     "3": {
         "name": "Wallace and Gromit",
         "address": "62 West Wallaby Street",
         "phone": "07700 232 787",
         "courier": 8,
-        "status": 0
+        "status": 0,
+        "items": [
+            0,
+            2,
+            4
+        ]
     },
     "4": {
         "name": "Keith and Jim",
         "address": "The Moon",
         "phone": "0800 00 1066",
         "courier": 1,
-        "status": 0
+        "status": 0,
+        "items": [
+            5,
+            10,
+            9,
+            6,
+            8,
+            11
+        ]
     },
     "6": {
-        "name": "George",
-        "address": "Room 220, The Ritz",
-        "phone": "Contact The Butler",
+        "name": "Sweeny Todd",
+        "address": "186 Fleet Street",
+        "phone": "",
         "courier": 0,
-        "status": 1
+        "status": 1,
+        "items": [
+            1,
+            7,
+            12,
+            12,
+            12,
+            12,
+            12
+        ]
     }
 }

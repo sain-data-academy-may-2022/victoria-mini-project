@@ -5,5 +5,5 @@ This is intended to form a working CLI-based management and order system for a p
 It will be able to manage the products for sale, place and update orders, and manage a courier database.
 
 
-
-# GIT KATA FOR 6th JUNE
+#
+To run tests, move all files with tests into module folder and run python3 -m pytest (-sv)

@@ -1,4 +1,4 @@
-'''module which handles the loading and saving of json files related to the app'''
+'''Module which handles the loading and saving of json files'''
 
 import json
 
