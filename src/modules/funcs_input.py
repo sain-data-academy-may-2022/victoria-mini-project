@@ -1,12 +1,14 @@
 '''Module which handles all input functions within the app'''
 
+from modules import funcs_bool as f_b
+
 ####################
 ###### INPUTS ######
 ####################
 # formats a string for proper insertion
 def format_string(text: str):
     '''Formats a given string for proper insertion'''
-    return text.strip(' £\n\t').title()
+    return text.lstrip(' £\n\t\'\"\`;').rstrip(' £\n\t\'\"\`;-').title()
 
 
 # takes a question to ask the user and returns an integer response, allows blank responses if set
@@ -17,7 +19,7 @@ def get_int_input(question: str, allow_blank: bool = False, allow_zero: bool = F
     valid_num = False
 
     while not valid_num:
-        number = input(f'{question}:\n ')
+        number = format_string(input(f'{question}:\n '))
         try:
             number = int(number)
 
@@ -38,14 +40,14 @@ def get_int_input(question: str, allow_blank: bool = False, allow_zero: bool = F
 
 
 # takes a question to ask the user and returns a float response, allows blank responses if set
-def get_float_input(question: str, allow_blank: bool = False):
+def get_positive_float_input(question: str, allow_blank: bool = False):
     '''Gets an input question and returns the exact float if the input can be converted, the number is positive, and allow_blank = False.
     Otherwise returns an empty string if allow_blank is True'''
 
     valid_num = False
 
     while not valid_num:
-        number = input(f'{question}:\n ')
+        number = format_string(input(f'{question}:\n> '))
         try:
             number = float(number)
 
@@ -60,9 +62,9 @@ def get_float_input(question: str, allow_blank: bool = False):
                 return ''
             else:
                 print('Please enter a valid number.')
-                return get_float_input(question, allow_blank)
+                return get_positive_float_input(question, allow_blank)
             
-    return number
+    return round(number, 2)
 
 
 # takes a question to ask and returns a string response, allows blank responses if set
@@ -70,7 +72,7 @@ def get_string_input(question: str, allow_blank: bool = False):
     '''Gets an input question and returns a non-empty string if allow_blank = False
     and allows an empty string if allow_blank = True'''
 
-    answer = format_string(input(f'{question}\n> '))
+    answer = format_string(input(f'{question}:\n> '))
     
     if len(answer) > 0 or (answer == '' and allow_blank):
         return answer
@@ -80,7 +82,17 @@ def get_string_input(question: str, allow_blank: bool = False):
         return get_string_input(question, allow_blank)
 
 
-# next function here
-def func():
-    pass
+# gets a string input and checks if it is exists within a list, returns the input is it does
+def get_input_within_list(question: str, list_of_values: list, allow_blank: bool = False):
+    '''Takes an input question and returns a string value only if it exists within a list
+    Allows return of an empty string if allow_blank = True'''
+    
+    answer = get_string_input(question, allow_blank)
+
+    if f_b.is_item_in_list(answer, list_of_values) or (answer == '' and allow_blank):
+        return answer
+
+    else:
+        print('Please enter a valid option.')
+        return get_input_within_list(question, list_of_values, allow_blank)
 

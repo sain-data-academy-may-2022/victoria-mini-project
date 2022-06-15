@@ -12,7 +12,8 @@ import modules.menu_orders as m_o
 # print the main menu options
 def print_main_menu():
     '''Prints the main menu options'''
-
+    
+    cs.clear_screen()
     print('''\nWelcome to "Bready or Not" Breakfast Bar
 
     [1] - Product Management
@@ -26,7 +27,6 @@ def print_main_menu():
 # controls main menu input and selection
 def main_menu_choice(products: list, couriers: list, orders: list, connection):
 
-    cs.clear_screen()
     print_main_menu()
 
 
@@ -51,12 +51,10 @@ def main_menu_choice(products: list, couriers: list, orders: list, connection):
 
     # clear screen and reprint main menu options
     elif choice == '':
-        cs.clear_screen()
         print_main_menu()
 
     # handle incorrect input
     else: 
-        cs.clear_screen()
         print_main_menu()
         print('Invalid selection. Please select a valid menu option.')
 
@@ -72,5 +70,6 @@ def main_menu(products: list, couriers: list, orders: list, connection):
         
         running, products, couriers, orders = main_menu_choice(products, couriers, orders, connection)
 
+    cs.clear_screen()
     return orders
 

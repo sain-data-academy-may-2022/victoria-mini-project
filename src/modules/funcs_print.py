@@ -23,13 +23,13 @@ Prints a formatted list with the name, price and phone if those keys exist withi
 
 
 # print an indexed list for a provided list of dicts
-def _print_indexed(data_list: list):
+def _print_indexed(data_list: list, start: int = 1):
     '''
 Requires a non-empty list of dicts.
 Prints a formatted list with an index, name, price and phone if those keys exist within the list.
 '''
 
-    for index, row in enumerate(data_list, 1):
+    for index, row in enumerate(data_list, start):
         print(f'{index:>2}', end = ' ')
 
         for key in row:
@@ -56,12 +56,12 @@ def print_plain_list(item_type: str, data_list: list):
 
 
 # print a list with indexes for a given item type
-def print_indexed_list(item_type: str, data_list: list):
+def print_indexed_list(item_type: str, data_list: list, start_index: str = 1):
     '''prints a formatted, indexed list if data exists within that list'''
 
     if data_list:
         print(f'\nCurrent {item_type}:')
-        _print_indexed(data_list)
+        _print_indexed(data_list, start_index)
     
     else:
         print(f'\nThere are no {item_type} currently listed.\n')

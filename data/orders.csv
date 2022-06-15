@@ -1,5 +1,1 @@
 number,name,address,phone,courier,status,items
-1,Sherlock Holmes,221b Baker Street,07700 123 456,1,4,"[1, 2, 5]"
-2,Phileas Fogg,7 Savile Row,07700 987 321,1,3,"[2, 2, 3]"
-3,Wallace and Gromit,62 West Wallaby Street,07700 444 456,8,2,"[1, 1]"
-4,Keith and Jim,The Moon,0800 00 1066,1,0,"[5, 5, 5, 5, 5, 5]"

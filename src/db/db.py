@@ -14,39 +14,36 @@ database = os.environ.get('mysql_db')
 
 # Establish a database connection
 def get_connection():
-    connection = pymysql.connect(
-        host,
-        user,
-        password,
-        database
-    )
+    try:
+        connection = pymysql.connect(
+            host,
+            user,
+            password,
+            database
+        )
 
-    return connection
+        return connection
+
+    except Exception as e:
+        print(f'An error occured establishing a connection!\nError: {e}')
+
 
 # Close a database connection
 def close_connection(connection: pymysql.Connection):
     connection.close()
 
+
 # Execute a sql query and return data from it
 def db_query(sql_query: str, connection: pymysql.Connection):
 
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+        cursor.execute(sql_query)
+        return cursor.fetchall()
 
-    cursor.execute(sql_query)
-    
-    db_data = cursor.fetchall()
-
-    connection.commit()
-    cursor.close()
-
-    return db_data
 
 # Execute a sql query without returning anything
 def db_command(sql_query: str, connection: pymysql.Connection):
 
-    cursor = connection.cursor()
-
-    cursor.execute(sql_query)
-
-    connection.commit()
-    cursor.close()
+    with connection.cursor() as cursor:
+        cursor.execute(sql_query)
+        connection.commit()

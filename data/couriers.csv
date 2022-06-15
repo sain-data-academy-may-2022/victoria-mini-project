@@ -1,4 +1,8 @@
-name,phone
-John,07700 123 099
-Sandra,07704 283 877
-Bobbie,020 8843 8331
+courier_id,name,phone,active
+1,John,07700 123 099,0
+2,Sandra,07704 283 877,1
+3,Bobbie,07708 247 641,1
+5,Zeke,07705 366 325,1
+6,Jozef,07709 544 656,1
+7,Jodie,07709 633 768,1
+8,Yasmin,07701 640 005,1

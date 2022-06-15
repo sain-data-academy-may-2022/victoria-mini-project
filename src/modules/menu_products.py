@@ -4,6 +4,7 @@
 ### imports
 import modules.clear_screen as cs
 import modules.funcs_print as f_p
+import modules.funcs_input as f_i
 # import modules.funcs_utilities as f_u
 # import modules.utilities as util
 
@@ -39,15 +40,15 @@ def product_menu_choice(products: list, connection):
         print_product_list(products)
 
     # create new product
-    elif choice == '2':
+    elif choice == '2':         ### TEST
         products = add_product(products, connection)
 
     # update existing product
-    elif choice == '3':
+    elif choice == '3':         #### TEST
         print('3')
 
     # delete existing product
-    elif choice == '4':
+    elif choice == '4':         #### TEST
         print('4')
 
     # clear screen and reprint product menu options
@@ -77,7 +78,7 @@ def product_menu(products: list, connection):
     return products
 
 
-### functional functions (wut)
+### program functions
 
 # print the product list (only available products)
 def print_product_list(products: list):
@@ -94,10 +95,30 @@ def print_product_list(products: list):
     f_p.print_plain_list('available toppings', available_tops)
 
 
+# print the product list (only available products)
+def print_indexed_product_list(products: list):             #### NEEDS TESTING
+    available_drinks = [item for item in products if item['active'] == 1 and item['category'] == 'Drinks']
+    f_p.print_indexed_list('available drinks', available_drinks)
+
+    available_snacks = [item for item in products if item['active'] == 1 and item['category'] == 'Snacks']
+    f_p.print_indexed_list('available snacks', available_snacks)
+
+    available_base = [item for item in products if item['active'] == 1 and item['category'] == 'Base']
+    f_p.print_indexed_list('available bases', available_base)
+
+    available_tops = [item for item in products if item['active'] == 1 and item['category'] == 'Toppings']
+    f_p.print_indexed_list('available toppings', available_tops)
+
+
 # add a product to the products list
 def add_product(products: list, connection):
 
+    name = f_i.get_string_input('Enter name of new product')
+
+    
+
     # products = f_u.add_thing(products, 'product', ['category', 'price', 'current_inventory', 'active'], connection)
 
+    
     return products
 
