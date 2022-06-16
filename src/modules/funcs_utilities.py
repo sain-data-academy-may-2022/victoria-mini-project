@@ -24,7 +24,7 @@ Prints a formatted list with the name, price and phone if those keys exist withi
                 print(f'{row[key]:>21}', end = ': ')
 
             if key == 'price':
-                print(f'£{row[key]}')
+                print(f'£{row[key]:.2f}')
 
             if key == 'phone':
                 print(f'{row[key]}')
@@ -45,8 +45,11 @@ Prints a formatted list with an index, name, price and phone if those keys exist
                 print(f'{row[key]:.>18}', end = ': ')
 
             if key == 'price':
-                print(f'£{row[key]}')
+                print(f'£{row[key]:>4.2f}', end = ' ')
                 
+            if key == 'stock':
+                print(f'{row[key]:>5}')
+
             if key == 'phone':
                 print(f'{row[key]}')
 
@@ -69,6 +72,7 @@ def print_indexed_list(item_type: str, data_list: list, start_index: str = 1):
 
     if data_list:
         print(f'\n{item_type.capitalize()}:')
+        print(f'{"ID"} {"Name":>18} {"Price":>6} {"Stock":>5}')
         _print_indexed(data_list, start_index)
     
     else:
@@ -85,6 +89,33 @@ def print_indexed_list(item_type: str, data_list: list, start_index: str = 1):
 def _format_string(text: str):
     '''Formats a given string for proper insertion'''
     return text.lstrip(' £\n\t\'\"\`;').rstrip(' £\n\t\'\"\`;-').title()
+
+
+# takes a question to ask the user and returns a 1 or 0 
+def get_bool_int_input(question: str, allow_blank: bool = False, return_bool: bool = False):
+    '''Gets an input question and returns a 1 or a 0 as substitute for a boolean True or False.
+    If allow_blank = True, returns an empty string'''
+
+    answer = _format_string(input(f'{question}:\n> '))
+
+    if answer == '' and allow_blank:
+        return ''
+
+    elif answer == 'Y' or answer == 'Yes' or answer == '1':
+        if return_bool:
+            return True
+        else:
+            return 1
+
+    elif answer == 'N' or answer == 'No' or answer == '0':
+        if return_bool:
+            return False
+        else:
+            return 0
+
+    else: 
+        print('Please enter a valid answer (yes/no).')
+        return get_bool_int_input(question, allow_blank, return_bool)
 
 
 # takes a question to ask the user and returns an integer response, allows blank responses if set
@@ -171,6 +202,38 @@ def get_input_within_list(question: str, list_of_values: list, allow_blank: bool
     else:
         print('Please enter a valid option.')
         return get_input_within_list(question, list_of_values, allow_blank)
+
+
+# gets an integer input and checks if it is exists as an index within a list, returns the index is it does
+def get_index_within_list(question: str, list_of_values: list, allow_blank: bool = False):
+    '''Takes an input question and returns an integer value only if it exists as an index in a list
+    Allows return of an empty string if allow_blank = True'''
+    
+    answer = get_int_input(question, allow_blank)
+
+    if  answer == '' and allow_blank:
+        return ''
+
+    elif is_index_within_range(answer - 1, list_of_values):
+        return answer - 1
+
+    else:
+        print('Please enter a valid option.')
+        return get_index_within_list(question, list_of_values, allow_blank)
+
+
+# takes a value and an input function from input section and will return the result if the input is not blank, otherwise returns old value
+def get_updated_value(value, input_function):
+
+    new_value = input_function
+
+    if new_value == '':
+        return value
+    else:
+        return new_value
+
+
+
 
 
 
