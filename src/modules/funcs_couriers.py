@@ -2,6 +2,7 @@
 
 
 ### imports
+from pymysql import IntegrityError
 import modules.funcs_utilities as util
 from db.db import db_command, db_query
 
@@ -188,8 +189,16 @@ def delete_courier(cour: dict, couriers: list, connection):
 
     if confirm:
 
-        couriers = update_couriers_db(sql_query, connection)
-        print(f'\n{cour["name"]} has been deleted.')
+        try:
+            couriers = update_couriers_db(sql_query, connection)
+            print(f'\n{cour["name"]} has been deleted.')
+
+        except IntegrityError as e:
+            print(f'\nUnable to delete {cour["name"]} from the database. \nSetting {cour["name"]} as inactive.')
+
+            sql_query = f'''UPDATE couriers SET `active` = 0 WHERE `courier_ID` = {cour["courier_id"]}'''
+
+            couriers = update_couriers_db(sql_query, connection)
 
     return couriers
 

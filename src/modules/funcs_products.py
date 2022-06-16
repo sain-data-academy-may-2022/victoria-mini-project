@@ -251,8 +251,16 @@ def delete_product(prod: dict, products: list, connection):
 
     if confirm:
 
-        products = update_products_db(sql_query, connection)
-        print(f'\n{prod["name"]} has been deleted.')
+        try:
+            products = update_products_db(sql_query, connection)
+            print(f'\n{prod["name"]} has been deleted.')
+
+        except IntegrityError as e:
+            print(f'\nUnable to delete {prod["name"]} from the database. \nSetting {prod["name"]} as inactive.')
+
+            sql_query = f'''UPDATE products SET `active` = 0, `stock` = 0 WHERE `product_ID` = {prod["product_id"]};'''
+
+            products = update_products_db(sql_query, connection)
 
     return products
 
