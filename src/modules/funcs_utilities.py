@@ -1,5 +1,9 @@
 '''Module which handles all utility/generic functions'''
 
+### PRINTING
+### INPUTS
+### BOOLS
+### UTILITIES
 
 
 
@@ -52,11 +56,11 @@ def print_plain_list(item_type: str, data_list: list):
     '''prints a formatted list if data exists within that list'''
 
     if data_list:
-        print(f'\nCurrent {item_type}:')
+        print(f'\n{item_type.capitalize()}:')
         _print_non_indexed(data_list)
     
     else:
-        print(f'\nThere are no {item_type} currently listed.\n')
+        print(f'\nThere are no {item_type} listed.')
 
 
 # print a list with indexes for a given item type
@@ -64,11 +68,11 @@ def print_indexed_list(item_type: str, data_list: list, start_index: str = 1):
     '''prints a formatted, indexed list if data exists within that list'''
 
     if data_list:
-        print(f'\nCurrent {item_type}:')
+        print(f'\n{item_type.capitalize()}:')
         _print_indexed(data_list, start_index)
     
     else:
-        print(f'\nThere are no {item_type} currently listed.\n')
+        print(f'\nThere are no {item_type} listed.')
 
 
 
@@ -78,7 +82,7 @@ def print_indexed_list(item_type: str, data_list: list, start_index: str = 1):
 ###### INPUTS ######
 ####################
 # formats a string for proper insertion
-def format_string(text: str):
+def _format_string(text: str):
     '''Formats a given string for proper insertion'''
     return text.lstrip(' £\n\t\'\"\`;').rstrip(' £\n\t\'\"\`;-').title()
 
@@ -91,7 +95,7 @@ def get_int_input(question: str, allow_blank: bool = False, allow_zero: bool = F
     valid_num = False
 
     while not valid_num:
-        number = format_string(input(f'{question}:\n> '))
+        number = _format_string(input(f'{question}:\n> '))
         try:
             number = int(number)
 
@@ -119,7 +123,7 @@ def get_positive_float_input(question: str, allow_blank: bool = False):
     valid_num = False
 
     while not valid_num:
-        number = format_string(input(f'{question}:\n> '))
+        number = _format_string(input(f'{question}:\n> '))
         try:
             number = float(number)
 
@@ -144,7 +148,7 @@ def get_string_input(question: str, allow_blank: bool = False):
     '''Gets an input question and returns a non-empty string if allow_blank = False
     and allows an empty string if allow_blank = True'''
 
-    answer = format_string(input(f'{question}:\n> '))
+    answer = _format_string(input(f'{question}:\n> '))
     
     if len(answer) > 0 or (answer == '' and allow_blank):
         return answer
@@ -223,6 +227,11 @@ def func():
 #### UTILITIES #####
 ####################
 ### LISTS
+# get index for a dict based on the value of a key within that dict
+def get_dict_index(key: str, value: str, a_list: list):
+
+    return next(index for (index, d) in enumerate(a_list) if d[key] == value)
+
 # add an item to a list
 def add_item_to_list(item: dict, a_list: list):
     '''Adds an item to a list'''

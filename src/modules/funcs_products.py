@@ -8,38 +8,63 @@ from db.db import db_command, db_query
 ### program functions
 
 # print the product list (only available products)
-def print_product_list(products: list):
-    available_drinks = [item for item in products if item['active'] == 1 and item['category'] == 'Drinks']
-    util.print_plain_list('available drinks', available_drinks)
+def print_product_list(products: list, 
+                        allow_oos: bool = True,
+                        allow_inactive: bool = False):
+    available_drinks = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Drinks']
+    util.print_plain_list('currently available drinks', available_drinks)
 
-    available_snacks = [item for item in products if item['active'] == 1 and item['category'] == 'Snacks']
-    util.print_plain_list('available snacks', available_snacks)
+    available_snacks = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Snacks']
+    util.print_plain_list('currently available snacks', available_snacks)
 
-    available_base = [item for item in products if item['active'] == 1 and item['category'] == 'Base']
-    util.print_plain_list('available bases', available_base)
+    available_base = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Base']
+    util.print_plain_list('currently available bases', available_base)
 
-    available_tops = [item for item in products if item['active'] == 1 and item['category'] == 'Toppings']
-    util.print_plain_list('available toppings', available_tops)
+    available_tops = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Toppings']
+    util.print_plain_list('currently available toppings', available_tops)
+
+    if allow_oos:
+        out_of_stock = [item for item in products if item['active'] == 1 and item['stock'] == 0]
+        util.print_plain_list('items currently out of stock', out_of_stock)
+
+    if allow_inactive:
+        inactive = [item for item in products if item['active'] == 0]
+        util.print_plain_list('inactive menu items', inactive)
 
 
 # print the product list (only available products)
-def print_indexed_product_list(products: list):             #### NEEDS TESTING
+def print_indexed_product_list(products: list, 
+                                allow_oos: bool = True, 
+                                allow_inactive: bool = False):             #### NEEDS TESTING
     index = 1
 
-    available_drinks = [item for item in products if item['active'] == 1 and item['category'] == 'Drinks']
-    util.print_indexed_list('available drinks', available_drinks, index)
+    available_drinks = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Drinks']
+    util.print_indexed_list('currently available drinks', available_drinks, index)
 
     index += len(available_drinks)
-    available_snacks = [item for item in products if item['active'] == 1 and item['category'] == 'Snacks']
-    util.print_indexed_list('available snacks', available_snacks, index)
+    available_snacks = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Snacks']
+    util.print_indexed_list('currently available snacks', available_snacks, index)
 
     index += len(available_snacks)
-    available_base = [item for item in products if item['active'] == 1 and item['category'] == 'Base']
-    util.print_indexed_list('available bases', available_base, index)
+    available_base = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Base']
+    util.print_indexed_list('currently available bases', available_base, index)
 
     index += len(available_base)
-    available_tops = [item for item in products if item['active'] == 1 and item['category'] == 'Toppings']
-    util.print_indexed_list('available toppings', available_tops, index)
+    available_tops = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Toppings']
+    util.print_indexed_list('currently available toppings', available_tops, index)
+
+    if allow_oos:
+        index += len(available_tops)
+        out_of_stock = [item for item in products if item['active'] == 1 and item['stock'] == 0]
+        util.print_indexed_list('items currently out of stock', out_of_stock, index)
+
+    if allow_inactive:
+        if allow_oos:
+            index += len(out_of_stock)
+        else:
+            index += len(available_tops)
+        inactive = [item for item in products if item['active'] == 0]
+        util.print_indexed_list('inactive menu items', inactive, index)
 
 
 # gets name for a new product, either adds new product, updates it, or returns product list
@@ -62,7 +87,10 @@ def try_add_product(products: list, connection):
         choice = input('Do you want to update this item? Press ENTER to update or any other key to cancel.\n> ')
 
         if choice == '':
-            products = update_product()
+
+            _index = util.get_dict_index('name', name, products)
+
+            products = update_product(products)
 
     return products
 
@@ -71,15 +99,13 @@ def try_add_product(products: list, connection):
 def add_new_product(name: str, connection):
     '''Gets remaining parameters for new product and inserts them into the database'''
 
-    category = util.get_input_within_list('\nAvailable categories: Drinks, Snacks, Base, or Toppings.\n\
-                                        \nEnter category for this product', \
-                                        ['Drinks', 'Snacks', 'Base', 'Toppings'])
+    sql_query = get_product_data(name)
 
-    price = util.get_positive_float_input('\nEnter price for this product')
+    return update_products_db(sql_query, connection)
 
-    stock = util.get_int_input('\nEnter initial stock amount', allow_zero = True)
 
-    sql_query = f"INSERT INTO `products` (`name`, `category`, `price`, `stock`) VALUES ('{name}', '{category}', {price}, {stock})"
+# inserts product into product database
+def update_products_db(sql_query: str, connection):
 
     db_command(sql_query, connection)
 
@@ -89,16 +115,32 @@ def add_new_product(name: str, connection):
                             WHEN category = "Snacks" THEN 2
                             WHEN category = "Base" THEN 3
                             ELSE 4 END''', connection)
-
     return products
+
+
+# gets remainder of product data, returns a formatted sql query
+def get_product_data(name: str):
+
+    category = util.get_input_within_list('\nAvailable categories: Drinks, Snacks, Base, or Toppings.\n\
+                                        \nEnter category for this product', \
+                                        ['Drinks', 'Snacks', 'Base', 'Toppings'])
+
+    price = util.get_positive_float_input('\nEnter price for this product')
+
+    stock = util.get_int_input('\nEnter initial stock amount', allow_zero = True)
+
+    return f"INSERT INTO `products`(`name`, `category`, `price`, `stock`) VALUES ('{name}', '{category}', {price}, {stock}); "
 
 
 # update an existing product
 def try_update_product(products: list, connection):
-    print_indexed_product_list(products)
-    pass
+    print_indexed_product_list(products, True, True)
+    return products
 
+
+def update_product(name, products: list):
+    return products
 
 
 def try_delete_product(products: list, connection):
-    pass
+    return products
