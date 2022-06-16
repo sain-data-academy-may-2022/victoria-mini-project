@@ -47,3 +47,4 @@ def db_command(sql_query: str, connection: pymysql.Connection):
     with connection.cursor() as cursor:
         cursor.execute(sql_query)
         connection.commit()
+        return cursor.lastrowid

@@ -1,7 +1,11 @@
+'''Module which handles loading files from database or local storage'''
+
 from file_handlers.csv_handler import load_products, load_couriers
 from db.db import get_connection, close_connection, db_query
 
-
+####################
+###### FILES #######
+####################
 ### PRODUCTS
 # attempts to load products from database first, then tries local storage, otherwise throws error and returns empty list
 def get_products():

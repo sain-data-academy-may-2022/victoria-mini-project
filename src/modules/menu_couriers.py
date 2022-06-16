@@ -3,9 +3,6 @@
 
 ### imports
 import modules.clear_screen as cs
-import modules.funcs_print as f_p
-import db.db as db
-# import modules.utilities as util
 
 
 ### menu functions

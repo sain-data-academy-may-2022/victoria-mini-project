@@ -1,12 +1,9 @@
-'''Module with functions to manage the products list'''
+'''Module with functions to manage the products list menu'''
 
 
 ### imports
 import modules.clear_screen as cs
-import modules.funcs_print as f_p
-import modules.funcs_input as f_i
-# import modules.funcs_utilities as f_u
-# import modules.utilities as util
+import modules.funcs_products as prod
 
 
 ### menu functions
@@ -37,19 +34,19 @@ def product_menu_choice(products: list, connection):
 
     # print product menu list
     elif choice == '1':
-        print_product_list(products)
+        prod.print_product_list(products)
 
     # create new product
     elif choice == '2':         ### TEST
-        products = add_product(products, connection)
+        products = prod.try_add_product(products, connection)
 
     # update existing product
     elif choice == '3':         #### TEST
-        print('3')
+        products = prod.try_update_product(products, connection)
 
     # delete existing product
     elif choice == '4':         #### TEST
-        print('4')
+        products = prod.try_delete_product(products, connection)
 
     # clear screen and reprint product menu options
     elif choice == '':
@@ -76,49 +73,3 @@ def product_menu(products: list, connection):
         running, products = product_menu_choice(products, connection)
 
     return products
-
-
-### program functions
-
-# print the product list (only available products)
-def print_product_list(products: list):
-    available_drinks = [item for item in products if item['active'] == 1 and item['category'] == 'Drinks']
-    f_p.print_plain_list('available drinks', available_drinks)
-
-    available_snacks = [item for item in products if item['active'] == 1 and item['category'] == 'Snacks']
-    f_p.print_plain_list('available snacks', available_snacks)
-
-    available_base = [item for item in products if item['active'] == 1 and item['category'] == 'Base']
-    f_p.print_plain_list('available bases', available_base)
-
-    available_tops = [item for item in products if item['active'] == 1 and item['category'] == 'Toppings']
-    f_p.print_plain_list('available toppings', available_tops)
-
-
-# print the product list (only available products)
-def print_indexed_product_list(products: list):             #### NEEDS TESTING
-    available_drinks = [item for item in products if item['active'] == 1 and item['category'] == 'Drinks']
-    f_p.print_indexed_list('available drinks', available_drinks)
-
-    available_snacks = [item for item in products if item['active'] == 1 and item['category'] == 'Snacks']
-    f_p.print_indexed_list('available snacks', available_snacks)
-
-    available_base = [item for item in products if item['active'] == 1 and item['category'] == 'Base']
-    f_p.print_indexed_list('available bases', available_base)
-
-    available_tops = [item for item in products if item['active'] == 1 and item['category'] == 'Toppings']
-    f_p.print_indexed_list('available toppings', available_tops)
-
-
-# add a product to the products list
-def add_product(products: list, connection):
-
-    name = f_i.get_string_input('Enter name of new product')
-
-    
-
-    # products = f_u.add_thing(products, 'product', ['category', 'price', 'current_inventory', 'active'], connection)
-
-    
-    return products
-
