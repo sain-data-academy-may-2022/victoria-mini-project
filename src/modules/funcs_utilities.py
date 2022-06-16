@@ -72,7 +72,6 @@ def print_indexed_list(item_type: str, data_list: list, start_index: str = 1):
 
     if data_list:
         print(f'\n{item_type.capitalize()}:')
-        print(f'{"ID"} {"Name":>18} {"Price":>6} {"Stock":>5}')
         _print_indexed(data_list, start_index)
     
     else:

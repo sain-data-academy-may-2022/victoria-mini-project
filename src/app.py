@@ -15,7 +15,7 @@ couriers = get_couriers()
 orders = db_query('SELECT * FROM orders', connection)
 
 ### main program file
-orders = main_menu(products, couriers, orders, connection)    #### add returns for products/couriers???
+products, couriers, orders = main_menu(products, couriers, orders, connection)    #### add returns for products/couriers???
 
 
 ### DEV

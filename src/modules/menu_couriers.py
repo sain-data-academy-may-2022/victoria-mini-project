@@ -3,12 +3,15 @@
 
 ### imports
 import modules.clear_screen as cs
+import modules.funcs_couriers as cour
 
 
 ### menu functions
 # print the courier management menu options
 def print_courier_options():
     '''Prints the courier management menu options'''
+
+    cs.clear_screen()
 
     print('''\nCourier Management
     
@@ -33,26 +36,27 @@ def courier_menu_choice(couriers: list, connection):
 
     # print courier menu list
     elif choice == '1':
-        print_courier_list(couriers)
+        cour.print_courier_list(couriers)
 
-    # 
+    # create new courier
     elif choice == '2':
-        print('2')
-        #
+        couriers = cour.try_add_courier(couriers, connection)
 
-    # 
+    # update existing courier
     elif choice == '3':
-        print('3')
-        #
+        couriers = cour.try_update_courier(couriers, connection)
+
+    # delete existing courier
+    elif choice == '4':
+        couriers = cour.try_delete_courier(couriers, connection)
 
     # clear screen and reprint courier menu options
     elif choice == '':
-        cs.clear_screen()
         print_courier_options()
 
     # handle incorrect input
     else: 
-        print('Invalid selection. Please select a valid menu option.')
+        print('\nInvalid selection. Please select a valid menu option.')
 
     return running, couriers
 
@@ -60,7 +64,6 @@ def courier_menu_choice(couriers: list, connection):
 # controls courier menu loop
 def courier_menu(couriers: list, connection):
 
-    cs.clear_screen()
     print_courier_options()
 
     running = True
@@ -70,12 +73,3 @@ def courier_menu(couriers: list, connection):
         running, couriers = courier_menu_choice(couriers, connection)
 
     return couriers
-
-
-### functional functions (wut)
-# print non-indexed courier list
-def print_courier_list(couriers: list):
-    f_p.print_plain_list('couriers', couriers)
-
-
-# 

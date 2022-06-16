@@ -11,6 +11,7 @@ from db.db import db_command, db_query
 def print_product_list(products: list, 
                         allow_oos: bool = True,
                         allow_inactive: bool = False):
+                        
     available_drinks = [item for item in products if item['active'] == 1 and item['stock'] > 0 and item['category'] == 'Drinks']
     util.print_plain_list('currently available drinks', available_drinks)
 

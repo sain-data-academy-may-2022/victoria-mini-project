@@ -11,6 +11,8 @@ import modules.funcs_products as prod
 def print_product_options():
     '''Prints the product management options'''
 
+    cs.clear_screen()
+
     print('''\nProduct Management
     
     [1] - Display Product List
@@ -50,7 +52,6 @@ def product_menu_choice(products: list, connection):
 
     # clear screen and reprint product menu options
     elif choice == '':
-        cs.clear_screen()
         print_product_options()
 
     # handle incorrect input
@@ -63,7 +64,6 @@ def product_menu_choice(products: list, connection):
 # controls product menu loop
 def product_menu(products: list, connection):
 
-    cs.clear_screen()
     print_product_options()
 
     running = True

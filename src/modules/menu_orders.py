@@ -3,6 +3,7 @@
 
 ### imports
 import modules.clear_screen as cs
+import modules.funcs_orders as ord
 
 
 ### data
@@ -17,6 +18,8 @@ status = ['order placed       ',
 # print the order management menu options
 def print_order_options():
     '''Prints the order management menu options'''
+
+    cs.clear_screen()
 
     print('''\nOrder Management
     
@@ -40,29 +43,33 @@ def order_menu_choice(products, couriers, orders, connection):
         running = False
         return running, products, couriers, orders
 
-    # 
+    # print order list
     elif choice == '1':
-        print('1')
-        #
+        ord.print_order_list()
 
-    # 
+    # create new order
     elif choice == '2':
-        print('2')
-        #
+        ord.try_add_order()
 
-    # 
+    # update existing order status
     elif choice == '3':
-        print('3')
-        #
+        ord.try_update_order_status()
+
+    # update existing order details
+    elif choice == '4':
+        ord.try_update_order_details()
+
+    # delete order
+    elif choice == '5':
+        ord.try_delete_order()
 
     # clear screen and reprint order menu options
     elif choice == '':
-        cs.clear_screen()
         print_order_options()
 
     # handle incorrect input
     else: 
-        print('Invalid selection. Please select a valid menu option.')
+        print('\nInvalid selection. Please select a valid menu option.')
 
     return running, products, couriers, orders
 
@@ -70,15 +77,14 @@ def order_menu_choice(products, couriers, orders, connection):
 # controls order menu loop
 def order_menu(products, couriers, orders, connection):
 
-    cs.clear_screen()
     print_order_options()
 
     running = True
     
     while running:
         
-        running, orders = order_menu_choice(products, couriers, orders, connection)
+        running, products, couriers, orders = order_menu_choice(products, couriers, orders, connection)
 
-    return orders
+    return products, couriers, orders
     
 

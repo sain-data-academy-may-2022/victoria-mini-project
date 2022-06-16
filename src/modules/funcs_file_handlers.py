@@ -51,7 +51,7 @@ def get_couriers():
     # try to load from database
     try:
         connection = get_connection()
-        couriers = db_query('''SELECT * FROM couriers''', connection)
+        couriers = db_query('''SELECT * FROM couriers ORDER BY active DESC''', connection)
         close_connection(connection)
     
     # if exception, then try to load from csv file

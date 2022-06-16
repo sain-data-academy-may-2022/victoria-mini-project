@@ -63,7 +63,7 @@ def main_menu_choice(products: list, couriers: list, orders: list, connection):
 
     # enter order management menu
     elif choice == '3':
-        orders = m_o.order_menu(products, couriers, orders, connection)
+        products, couriers, orders = m_o.order_menu(products, couriers, orders, connection)
 
     # clear screen and reprint main menu options
     elif choice == '':
@@ -87,5 +87,5 @@ def main_menu(products: list, couriers: list, orders: list, connection):
         running, products, couriers, orders = main_menu_choice(products, couriers, orders, connection)
 
     cs.clear_screen()
-    return orders
+    return products, couriers, orders
 
