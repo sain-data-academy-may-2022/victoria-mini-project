@@ -6,14 +6,6 @@ import modules.clear_screen as cs
 import modules.funcs_orders as ord
 
 
-### data
-status = ['order placed       ',
-          'being prepared     ',
-          'awaiting collection',
-          'in-transit         ',
-          'delivered          ']
-
-
 ### menu functions
 # print the order management menu options
 def print_order_options():
@@ -53,7 +45,7 @@ def order_menu_choice(products, couriers, orders, connection):
 
     # update existing order status
     elif choice == '3':
-        ord.try_update_order_status()
+        ord.try_update_order_status(connection)
 
     # update existing order details
     elif choice == '4':
@@ -61,7 +53,7 @@ def order_menu_choice(products, couriers, orders, connection):
 
     # delete order
     elif choice == '5':
-        ord.try_delete_order()
+        ord.try_delete_order(connection)
 
     # clear screen and reprint order menu options
     elif choice == '':

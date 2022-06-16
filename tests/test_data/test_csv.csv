@@ -1,0 +1,2 @@
+product_id,courier_id,name,phone,category,price,stock,active
+1,1,Tea,07700123456,Drinks,1.80,200,1
