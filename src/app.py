@@ -27,8 +27,8 @@ products, couriers, orders = main_menu(products, couriers, orders, connection)  
 
 
 ### save files amd exit
-# write_products(products)
-# write_couriers(couriers)
+write_products(products)
+write_couriers(couriers)
 close_connection(connection)
 
 print('\nClosing program, goodbye!\n')

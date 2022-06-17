@@ -15,12 +15,43 @@ status_list = ['order placed',
 
 ### program functions
 
-def print_order_list():
-    pass
+
+
+def print_order_list(connection):
+    
+    orders = db_query('''
+        SELECT 
+        o.order_id,
+        cu.name AS `customer_name`,
+        cu.address AS `customer_address`,   
+        co.name AS `courier`,
+        os.status AS `status`
+
+        FROM orders AS o
+
+        JOIN couriers AS co ON o.courier_id = co.courier_id
+        JOIN order_status AS os ON o.status_id = os.status_id
+        JOIN customers AS cu ON o.customer_id = cu.customer_id
+    ''', connection)
+
+    for each in orders:
+        print(f'\nOrder Number: {each["order_id"]}')
+        for k, v in each.items():
+            if k == 'order_id':
+                pass
+            else:
+                print(f'{k.replace("_", " ").title():>21} - {v}')
+
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#
+def update_orders_db():
+    print('\nFeature coming soon!!\n\n')
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#
 def try_add_order():
-    pass
+    print('\nFeature coming soon!!\n\n')
 
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -40,7 +71,8 @@ def try_update_order_status(connection):
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 def try_update_order_details():
-    pass
+    print('\nFeature coming soon!!\n\n')
+
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #
@@ -56,4 +88,6 @@ def try_delete_order(connection):
     db_command(sql_query, connection)
 
     print(f'\nOrder number {order_num} has been deleted.')
+
+
 

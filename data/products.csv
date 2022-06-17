@@ -1,14 +1,13 @@
 product_id,name,category,price,stock,active
 1,Tea,Drinks,1.80,200,1
-2,Coffee,Drinks,2.20,200,1
-43,Hot Chocolate,Drinks,2.80,0,0
+2,Latte,Drinks,3.20,200,1
+17,Americano,Drinks,3.50,0,0
 4,Banana Nut Muffin,Snacks,3.20,12,1
-5,Blueberry Muffin,Snacks,3.20,0,0
-6,Pancakes,Base,4.30,56,1
-7,Waffles,Base,4.50,0,0
-8,Crepes,Base,4.20,0,0
-9,Maple Syrup,Toppings,0.40,76,1
-10,Berries,Toppings,1.30,6,1
-11,Nutella,Toppings,0.80,19,1
-12,Cinnamon Sugar,Toppings,0.40,0,0
-13,Bacon,Toppings,1.10,0,0
+3,Pancakes,Base,4.30,56,1
+8,Crepes,Base,4.20,24,1
+9,Waffles,Base,4.50,45,1
+5,Nutella,Toppings,0.80,200,1
+6,Maple Syrup,Toppings,0.40,76,1
+7,Berries,Toppings,1.30,6,1
+12,Bacon,Toppings,1.30,0,1
+13,Cinnamon Sugar,Toppings,0.60,8,1

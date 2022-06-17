@@ -16,9 +16,9 @@ def print_order_options():
     print('''\nOrder Management
     
     [1] - Display Order List
-    [2] - Add a New Order
-    [3] - Advance Order Status
-    [4] - Update Existing Order Details
+    [2] - Add a New Order [in-progress...]
+    [3] - Update Existing Order Status
+    [4] - Update Existing Order Details [in-progress...]
     [5] - Delete an Order
     
     [0] - Back to Main Menu''')
@@ -37,7 +37,7 @@ def order_menu_choice(products, couriers, orders, connection):
 
     # print order list
     elif choice == '1':
-        ord.print_order_list()
+        ord.print_order_list(connection)
 
     # create new order
     elif choice == '2':
